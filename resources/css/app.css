@@ -1,0 +1,58 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.esmeralda {
+    --tw-bg-opacity: 1;
+    background-color: rgb(52 211 153 / var(--tw-bg-opacity));
+}
+
+.icone_menu {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.font_header {
+    font-size: 1.2rem;
+}
+
+.trilha_nav {
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.card {
+    background-color: rgb(52 211 153);
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.6');
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    color: white;
+}
+
+.w_login {
+    width: 60%;
+}
+
+.tela_altura_card {
+    height: 50vh;
+    margin-top: 15vh;
+}
+
+.tela_altura_titulo {
+    height: 40vh;
+    margin-top: 20vh;
+}
+
+.logo_font {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 3rem;
+    color: rgb(16 185 129);
+}
+
+.botao_login {
+    color: rgb(16 185 129);
+}
+
+.pl-login {
+    padding-left: 20%;
+}
