@@ -9,7 +9,7 @@
                 <div x-data="{open: false}" >
                     <button x-on:click="open =! open" class="inline-flex"> 
                         <span class="mr-1 font_header"> 
-                            <i class="bi bi-person-circle h-20"></i> Usuário 
+                            <i class="bi bi-person-circle h-20"></i> {{ $usuario['nome'] }}
                         </span> 
                         <i class="bi bi-caret-down-fill icone_menu"></i>
                     </button>

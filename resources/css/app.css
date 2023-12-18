@@ -38,6 +38,11 @@
     margin-top: 15vh;
 }
 
+.tela_altura_card_2 {
+    height: 55vh;
+    margin-top: 15vh;
+}
+
 .tela_altura_titulo {
     height: 40vh;
     margin-top: 20vh;
@@ -49,10 +54,47 @@
     color: rgb(16 185 129);
 }
 
-.botao_login {
+.botao_auth {
     color: rgb(16 185 129);
 }
 
 .pl-login {
     padding-left: 20%;
+}
+
+.ml-15{
+    margin-left: 15%;
+}
+
+.ml-7-5{
+    margin-left: 7.5%;
+}
+
+.w-78{
+    width: 78%;
+}
+
+.w-89{
+    width: 89%;
+}
+
+.color-placeholder{
+    color:rgba(97, 95, 95, 0.562);
+}
+
+.link{
+    color:rgb(0, 153, 255);
+    text-decoration: underline;
+}
+
+.link:hover {
+    color:red;
+}
+
+.h-90{
+    height: 90%;
+}
+
+.alerta{
+    padding-left: 44%;
 }

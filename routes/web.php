@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaginasController;
+use App\Http\Controllers\AutenticacaoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PaginasController::class, 'inicialPagina'])->name('inicial');
+Route::get('/inicial', [PaginasController::class, 'inicialPagina'])->name('inicial');
 
 #Rotas de Autenticação
 Route::get('/registro', [PaginasController::class, 'registroPagina'])->name('registro');
+Route::post('/registro', [AutenticacaoController::class, 'registroPost'])->name('registroPost');
 
-Route::get('/login', [PaginasController::class, 'loginpagina'])->name('login'); 
+Route::get('/', [PaginasController::class, 'loginpagina'])->name('login');
+Route::post('/', [AutenticacaoController::class, 'loginPost'])->name('loginPost'); 
+
