@@ -39,8 +39,8 @@
 }
 
 .tela_altura_card_2 {
-    height: 55vh;
-    margin-top: 15vh;
+    height: 70vh;
+    margin-top: 10vh;
 }
 
 .tela_altura_titulo {
@@ -62,27 +62,27 @@
     padding-left: 20%;
 }
 
-.ml-15{
+.ml-15 {
     margin-left: 15%;
 }
 
-.ml-7-5{
+.ml-7-5 {
     margin-left: 7.5%;
 }
 
-.w-78{
+.w-78 {
     width: 78%;
 }
 
-.w-89{
+.w-89 {
     width: 89%;
 }
 
-.color-placeholder{
+.color-placeholder {
     color:rgba(97, 95, 95, 0.562);
 }
 
-.link{
+.link {
     color:rgb(0, 153, 255);
     text-decoration: underline;
 }
@@ -91,31 +91,31 @@
     color:red;
 }
 
-.h-90{
+.h-90 {
     height: 90%;
 }
 
-.alerta{
+.alerta {
     padding-left: 44%;
 }
 
-.w-20\/100{
+.w-20\/100 {
     width: 20%;
 }
 
-.h-sidebar{
-    height: 91.7vh;
+.h-sidebar {
+    height: 90vh;
 }
 
-.border-sidebar{
+.border-sidebar {
     border-left: 0.5px solid rgb(52 211 153);
 }
 
-.border-homebar{
+.border-homebar {
     border-right: 0.01rem solid rgb(52 211 153);
 }
 
-.text-form-post{
+.text-form-post {
     font-size: 1.2rem;
 }
 
@@ -123,15 +123,15 @@
     border-color: rgb(167 243 208);
 }
 
-.border-post-w{
+.border-post-w {
     border-width: 1px;
 }
 
-.border-post-style{
+.border-post-style {
     border-style: solid;
 }
 
-.tam-input-1{
+.tam-input-1 {
     font-size: x-small;
 }
 
@@ -143,18 +143,42 @@
     font-size: smaller;
 }
 
-.text-post-1:focus{
+.text-post-1:focus {
     outline: none;
 }
 
-.text-post-1{
+.text-post-1 {
     resize: none;
 }
 
-.icone_menu_2{
+.icone_menu_2 {
     font-size: 1.5rem;
 }
 
 .bg-opacity-85 {
     --tw-bg-opacity: 0.85;
+}
+
+.fs-sml {
+    font-size: smaller;
+}
+
+.bg-gray-perfil {
+    background-color: rgb(255, 250, 250);
+}
+
+.h-visor {
+    height: 89.6vh;
+}
+
+.bg-white-tela {
+    background-color: white;
+}
+
+.h-banner-perfil {
+    height: 50vh;
+}
+
+.border-w {
+    border-width: 2px;
 }

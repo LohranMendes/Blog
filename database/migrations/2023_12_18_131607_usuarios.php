@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('usuario');
             $table->string('email')->unique();
             $table->string('senha');
+            $table->binary('foto_perfil');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -37,7 +37,7 @@
                     </form>
             </div>
             <div class="flex justify-center mt-3">
-                <a href="{{route('registro')}}" class="link">Não tem conta? Cadastra-se!</a>
+                <a href="{{route('registro')}}" class="link fs-sml">Não tem conta? Cadastra-se!</a>
             </div>
         </div>
         

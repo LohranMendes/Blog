@@ -31,55 +31,55 @@
 
     <div class="card tela_altura_card_2 w-2/5 mx-auto flex items-center justify-center">
         <div class="block">
-            <span class="text-3xl ml-10">Registre-se!</span>
+            <span class="text-2xl ml-10">Registre-se!</span>
             <hr class="mb-3 ml-3 mr-3 mt-2">
             <form action="{{route('registroPost')}}" method="POST">
                 @csrf
-                <div class="grid grid-cols-2 mb-3">
+                <div class="grid grid-cols-2 mb-3 fs-sml">
                     <div class="ml-15">
                         <label for="nomepessoa" class="block pl-1"> Nome: </label>
-                        <input type="text" id="nomepessoa" name="nomepessoa" class="block text-sm pl-1 p-1 text-gray-900 rounded-md w-89 hover:bg-gray-50" placeholder="Digite seu nome" required>
+                        <input type="text" id="nomepessoa" name="nomepessoa" class="block fs-sml pl-1 p-1 text-gray-900 rounded-md w-89 hover:bg-gray-50" placeholder="Digite seu nome" required>
                     </div>
                     
                     <div class="pl-1">
                         <label for="sobrenome" class="block"> Sobrenome: </label>
-                        <input type="text" id="sobrenome" name="sobrenome" class="block text-sm pl-1 p-1 text-gray-900 rounded-md w-78 hover:bg-gray-50" placeholder="Digite seu sobrenome" required>
+                        <input type="text" id="sobrenome" name="sobrenome" class="block fs-sml pl-1 p-1 text-gray-900 rounded-md w-78 hover:bg-gray-50" placeholder="Digite seu sobrenome" required>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 mb-3">
+                <div class="grid grid-cols-2 mb-3 fs-sml">
                     <div class="ml-15">
                         <label for="apelido" class="block"> Usuário: </label>
-                        <input type="text" id="apelido" name="apelido" class="block text-sm pl-1 p-1 text-gray-900 rounded-md w-89 hover:bg-gray-50" placeholder="Digite seu apelido" required>
+                        <input type="text" id="apelido" name="apelido" class="block fs-sml pl-1 p-1 text-gray-900 rounded-md w-89 hover:bg-gray-50" placeholder="Digite seu apelido" required>
                     </div>
                     <div class="pl-1">
-                        <label for="nascimento" class="block"> Nascimento: </label>
-                        <input type="date" id="nascimento" name="nascimento" class="block text-sm p-1 text-gray-900 rounded-md w-78 hover:bg-gray-50" required>
+                        <label for="nascimento" class="block "> Nascimento: </label>
+                        <input type="date" id="nascimento" name="nascimento" class="block fs-sml p-1 text-gray-900 rounded-md w-78 hover:bg-gray-50" required>
                     </div>
                 </div>
-                <div class="mb-3 ml-7-5">
+                <div class="mb-3 ml-7-5 fs-sml">
                     <label for="email" class="block"> Email: </label>
-                    <input type="email" id="email" name="email" class="block text-sm text-gray-900 pl-1 p-1 rounded-md w-89 hover:bg-gray-50" placeholder="email@exemplo.com" autocomplete="on" required>
+                    <input type="email" id="email" name="email" class="block fs-sml text-gray-900 pl-1 p-1 rounded-md w-89 hover:bg-gray-50" placeholder="email@exemplo.com" autocomplete="on" required>
                 </div>
-                <div class="grid grid-cols-2 mb-3">
+                <div class="grid grid-cols-2 mb-3 fs-sml">
                     <div class="ml-15">
                         <label for="senha" class="block"> Senha: </label>
-                        <input type="password" id="senha" name="senha" class="rounded-md text-sm pl-1 p-1 text-gray-900 w-89 hover:bg-gray-50" placeholder="Digite sua senha" required>
+                        <input type="password" id="senha" name="senha" class="rounded-md fs-sml pl-1 p-1 text-gray-900 w-89 hover:bg-gray-50" placeholder="Digite sua senha" required>
                     </div>
                     <div class="pl-1">
                         <label for="csenha" class=""> Confirmar Senha: </label>
-                        <input type="password" id="csenha" name="csenha" class="rounded-md text-sm pl-1 p-1 text-gray-900 w-78 hover:bg-gray-50" placeholder="Confirme sua senha" required>
+                        <input type="password" id="csenha" name="csenha" class="rounded-md fs-sml pl-1 p-1 text-gray-900 w-78 hover:bg-gray-50" placeholder="Confirme sua senha" required>
                     </div>
                 </div>
-                <div class="flex justify-end mr-16 mt-7 mb-2">
+                <div class="flex justify-end mr-16 mt-7 mb-2 fs-sml">
                     <button type="submit" class="bg-white botao_auth rounded-md p-1 hover:bg-gray-50 border border-gray-300">
-                        Registre-se!
+                        Registrar
                     </button>
                 </div>
             </form>
         </div>
     </div>
     <div class="flex justify-center mt-3">
-        <a href="{{route('login')}}" class="link">Tem uma conta? Faça login!</a>
+        <a href="{{route('login')}}" class="link fs-sml">Tem uma conta? Faça login!</a>
     </div>
 </div>
 @endsection

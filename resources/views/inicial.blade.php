@@ -4,13 +4,13 @@
 @section('conteudo')
 <div class="grid grid-cols-10 gap-0">
     <div class="col-span-2 p-4 border-homebar">
-        <div class="mb-2"> <!-- Adicione margem inferior conforme necessário -->
+        <div class="mb-2">
             FOTO
         </div>
     
         <div>
-            <div class="inline"> <!-- Adicione estilo inline -->
-                <span>{{ $usuario['nome'] }}</span>
+            <div class="inline">
+                <span>{{ $usuario['usuario'] }}</span>
             </div>
             <span>Editar Perfil</span>
         </div>
@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <aside class="border-sidebar h-sidebar col-span-2 w-full p-4">
+    <aside class="border-sidebar h-visor col-span-2 w-full p-4">
         <div>
             <ul>
                 <li>

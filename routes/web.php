@@ -21,6 +21,8 @@ Route::get('/inicial', [PaginasController::class, 'inicialPagina'])->name('inici
 Route::get('/registro', [PaginasController::class, 'registroPagina'])->name('registro');
 Route::post('/registro', [AutenticacaoController::class, 'registroPost'])->name('registroPost');
 
-Route::get('/', [PaginasController::class, 'loginpagina'])->name('login');
+Route::get('/', [PaginasController::class, 'loginPagina'])->name('login');
 Route::post('/', [AutenticacaoController::class, 'loginPost'])->name('loginPost'); 
 
+#Rotas do Perfil e Configurações
+Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil');
