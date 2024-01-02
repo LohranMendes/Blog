@@ -25,10 +25,11 @@
     </div>
 
     <div class="col-span-6 p-4">
-        <div class="">
-            <form>
-                <div class="border-cor border-post-style border-post-w">
-                    <label for="publi" class="text-form-post mb-1 pl-2"> Crie um novo tópico! </label>
+        <div>
+            <form action={{route('pp')}} method="POST">
+                @csrf
+                <div class="border-cor border-post-style border-post-w ">
+                    <label for="publi" class="text-form-post  mb-1 pl-2"> Crie um novo tópico! </label>
                     <hr class="w-full border-cor mb-2">
                     <textarea id="publi" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui"></textarea>
                     <div class="bg-gray-100 flex justify-end pr-2 rounded-sm">
@@ -39,6 +40,33 @@
                 </div>
             </form>
         </div>
+
+        @foreach ($publis as $publi)
+            <div class="mt-2">
+                <div class="border-cor border-post-style border-post-w">
+                    <div class="ml-2">
+                        {{$usuario['usuario']}}
+                    </div>
+                    <div class="text-xs mb-1 ml-2 mt-1">
+                        {{$publi['text']}}
+                    </div>
+                    <div class="bg-gray-100 text-xxs flex pr-2 rounded-sm h-4 text-color ml-2">
+                        <span class="mr-2">
+                            <i class="bi bi-heart-fill"></i>
+                            Curtir
+                        </span>
+                        <span class="mr-2"> 
+                            <i class="bi bi-chat-left-fill"></i>
+                            Comentar 
+                        </span>
+                        <span>
+                            <i class="bi bi-share-fill"></i>
+                            Compartilhar
+                        </span>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
     <aside class="border-sidebar h-visor col-span-2 w-full p-4">

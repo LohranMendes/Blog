@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\publicacaoModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,15 @@ class PaginasController extends Controller
     protected function inicialPagina () {
         $usuario['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
 
-        return view("inicial", compact('usuario'));
+        $meio = [];
+
+        $meio = publicacaoModel::select('text', 'id_usuario')->orderby('created_at', 'desc')->take(100)->get();
+
+        $publis = $meio->map(function ($item) {
+            return ['id_usuario' => $item->id_usuario, 'text' => $item->text];
+        })->toArray();
+
+        return view("inicial", compact('usuario', 'publis'));
     }
 
     protected function loginPagina (){

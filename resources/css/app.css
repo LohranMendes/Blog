@@ -140,7 +140,7 @@
 }
 
 .btn-font-size {
-    font-size: smaller;
+    font-size: x-small;
 }
 
 .text-post-1:focus {
@@ -181,4 +181,13 @@
 
 .border-w {
     border-width: 2px;
+}
+
+.text-xxs{
+    font-size: 0.5rem;
+    line-height: 1rem;
+}
+
+.text-color{
+    color: rgb(39, 167, 120);
 }

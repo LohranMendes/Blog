@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PaginasController;
 use App\Http\Controllers\AutenticacaoController;
+use App\Http\Controllers\PublicacaoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,6 @@ Route::post('/', [AutenticacaoController::class, 'loginPost'])->name('loginPost'
 
 #Rotas do Perfil e Configurações
 Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil');
+
+#Rotas de Publicacões
+Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp');
