@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id('id_usuario');
             $table->string('nome');
             $table->string('sobrenome');
-            $table->string('usuario');
+            $table->string('usuario')->unique();
             $table->string('email')->unique();
             $table->string('senha');
-            $table->binary('foto_perfil');
             $table->rememberToken();
             $table->timestamps();
         });

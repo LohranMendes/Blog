@@ -11,17 +11,13 @@ use Illuminate\Support\Facades\DB;
 class PaginasController extends Controller
 {
     protected function inicialPagina () {
-        $usuario['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
+        $user['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
 
-        $meio = [];
+        $posts = new publicacaoModel;
 
-        $meio = publicacaoModel::select('text', 'id_usuario')->orderby('created_at', 'desc')->take(100)->get();
+        $publis = $posts->postsUsuarios();
 
-        $publis = $meio->map(function ($item) {
-            return ['id_usuario' => $item->id_usuario, 'text' => $item->text];
-        })->toArray();
-
-        return view("inicial", compact('usuario', 'publis'));
+        return view("inicial", compact('user', 'publis'));
     }
 
     protected function loginPagina (){
@@ -32,12 +28,18 @@ class PaginasController extends Controller
         return view("auth/registro");
     }
 
-    protected function perfilPagina (Request $request){
+    protected function perfilPagina ($usuario){
         $this->verificaImagem();
 
-        $usuario = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil')->where('id_usuario', Auth::id())->first();
+        $u = User::select('id_usuario', 'usuario', 'nome', 'sobrenome', 'foto_perfil')->where('usuario', $usuario)->first();
 
-        return view("perfil", compact('usuario'));
+        $posts = new publicacaoModel;
+
+        $publis = $posts->postUsuario($u->id_usuario);
+
+        $user['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
+
+        return view("perfil", compact('user', 'publis', 'u'));
     }
 
     private function verificaImagem () {
@@ -52,12 +54,12 @@ class PaginasController extends Controller
     }
 
     private function imagemPadrao (){
-        $caminhoImagem = asset('img\foto-de-perfil-de-usuario.jpg');
+        $caminhoImagem = 'img/foto-de-perfil-de-usuario.jpg';
 
         DB::table('usuarios')
             ->where('id_usuario', Auth::id())
             ->update([
-                'foto_perfil' => $caminhoImagem,
+                'foto_perfil' => url($caminhoImagem),
             ]);
     }
 }

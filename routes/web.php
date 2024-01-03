@@ -25,6 +25,8 @@ Route::post('/registro', [AutenticacaoController::class, 'registroPost'])->name(
 Route::get('/', [PaginasController::class, 'loginPagina'])->name('login');
 Route::post('/', [AutenticacaoController::class, 'loginPost'])->name('loginPost'); 
 
+Route::get('/deslogar', [AutenticacaoController::class, 'desconectar'])->name('deslogar');
+
 #Rotas do Perfil e Configurações
 Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil');
 

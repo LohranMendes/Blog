@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Session;
 
 class AutenticacaoController extends Controller
 {
@@ -59,6 +59,8 @@ class AutenticacaoController extends Controller
         $data['usuario'] = $request->apelido;
         $data['email'] = $request->email;
         $data['senha'] = Hash::make($request->senha);
+        $data['foto_perfil'] = 'null';
+        $data['capa_perfil'] = 'null';
 
         $user = User::create($data);
 
@@ -67,5 +69,11 @@ class AutenticacaoController extends Controller
         }
 
         return redirect()->intended(route('registro'))->with('error', 'Ocorreu um erro no registro do usuário. Tente novamente.');
+    }
+
+    public function desconectar(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->intended(route('login'));
     }
 }

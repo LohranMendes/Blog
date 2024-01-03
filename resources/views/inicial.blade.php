@@ -10,7 +10,7 @@
     
         <div>
             <div class="inline">
-                <span>{{ $usuario['usuario'] }}</span>
+                <span>{{ $user['usuario'] }}</span>
             </div>
             <span>Editar Perfil</span>
         </div>
@@ -45,10 +45,12 @@
             <div class="mt-2">
                 <div class="border-cor border-post-style border-post-w">
                     <div class="ml-2">
-                        {{$usuario['usuario']}}
+                        <a href={{route('perfil', ['usuario' => $publi->usuario])}} class="text-color">
+                            {{$publi->usuario}}
+                        </a>
                     </div>
                     <div class="text-xs mb-1 ml-2 mt-1">
-                        {{$publi['text']}}
+                        {{$publi->text}}
                     </div>
                     <div class="bg-gray-100 text-xxs flex pr-2 rounded-sm h-4 text-color ml-2">
                         <span class="mr-2">

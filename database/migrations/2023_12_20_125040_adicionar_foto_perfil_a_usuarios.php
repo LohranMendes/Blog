@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->string('capa_perfil')->after('senha');
-            $table->string('foto_perfil')->after('senha');
+            $table->string('capa_perfil')->after('senha')->nullable()->default(NULL);;
+            $table->string('foto_perfil')->after('senha')->nullable()->default(NULL);
         });
     }
 
