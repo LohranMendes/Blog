@@ -42,14 +42,15 @@
             @foreach ($publis as $publi)
                 <div class="mt-2 mr-2 ml-2">
                     <div class="border-cor border-post-style border-post-w">
-                        <div class="ml-2">
+                        <div class="ml-2 text-color">
+                            <img src="{{ url($u['foto_perfil']) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
                             {{$publi->usuario}}
                         </div>
-                        <div class="text-xs mb-1 ml-2 mt-1">
+                        <div class="text-xs mb-4 ml-2 mt-1">
                             {{$publi->text}}
                         </div>
-                        <div class="bg-gray-100 text-xxs flex pr-2 rounded-sm h-4 text-color ml-2">
-                            <span class="mr-2">
+                        <div class="bg-gray-100 text-xxs flex pr-2 rounded-sm h-4 text-color">
+                            <span class="mr-2 ml-2">
                                 <i class="bi bi-heart-fill"></i>
                                 Curtir
                             </span>

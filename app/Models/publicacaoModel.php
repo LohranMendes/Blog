@@ -22,7 +22,7 @@ class publicacaoModel extends Model
     ];
 
     public function postsUsuarios() {
-        $result = DB::select('SELECT u.usuario, p.text
+        $result = DB::select('SELECT u.usuario, p.text, u.foto_perfil
             FROM usuarios u
             JOIN publicacao p ON u.id_usuario = p.id_usuario
             ORDER BY p.created_at DESC
@@ -32,7 +32,7 @@ class publicacaoModel extends Model
     }
 
     public function postUsuario($id){
-        $result = DB::select('SELECT u.usuario, p.text
+        $result = DB::select('SELECT u.usuario, p.text, u.foto_perfil
         FROM usuarios u
         JOIN publicacao p ON u.id_usuario = p.id_usuario and u.id_usuario = ' . $id .'
         ORDER BY p.created_at DESC

@@ -13,7 +13,7 @@
                     <div x-data="{open: false}" class="lg:inline hidden">
                         <button x-on:click="open =! open" class="inline-flex"> 
                             <span class="mr-1 font_header"> 
-                                <i class="bi bi-person-circle h-20"></i> {{ $user['usuario'] }}
+                                <img src="{{ url($user->foto_perfil) }}" alt="Foto do Perfil" class="h-5 w-5 inline-block"> {{ $user->usuario }}
                             </span> 
                             <i class="bi bi-caret-down-fill icone_menu"></i>
                         </button>
@@ -21,7 +21,7 @@
                         <div x-show="open" @click.away="open = false" class="absolute z-10 right-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                             <ul class="py-1 text-sm text-gray-800">
                                 <li> 
-                                    <a href="{{route('perfil', ['usuario' => $user['usuario']])}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-100"> Perfil </a> 
+                                    <a href="{{route('perfil', ['usuario' => $user->usuario])}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-100"> Perfil </a> 
                                 </li>
                                 <li> <a href="#" class="block px-4 py-1 rounded-sm hover:bg-gray-100"> Configurações </a></li>
                                 <li> <a href="{{route('deslogar')}}" class="mb-1 block px-4 py-1 rounded-sm hover:bg-gray-100"> Deslogar </a></li>
@@ -40,7 +40,7 @@
                                     <a href="{{route('inicial')}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-800"> Inicial </a> 
                                 </li>
                                 <li> 
-                                    <a href="{{route('perfil', ['usuario' => $user['usuario']])}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-800"> Perfil </a> 
+                                    <a href="{{route('perfil', ['usuario' => $user->usuario])}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-800"> Perfil </a> 
                                 </li>
                                 <li> 
                                     <a href="#" class="block px-4 py-1 rounded-sm hover:bg-gray-800"> Configurações </a>

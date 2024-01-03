@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class PaginasController extends Controller
 {
     protected function inicialPagina () {
-        $user['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
+        $user = User::select('usuario', 'foto_perfil')->where('id_usuario', Auth::id())->first();
 
         $posts = new publicacaoModel;
 
@@ -37,7 +37,7 @@ class PaginasController extends Controller
 
         $publis = $posts->postUsuario($u->id_usuario);
 
-        $user['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
+        $user = User::select('usuario', 'foto_perfil')->where('id_usuario', Auth::id())->first();
 
         return view("perfil", compact('user', 'publis', 'u'));
     }

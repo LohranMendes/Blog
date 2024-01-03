@@ -45,11 +45,12 @@
             <div class="mt-2">
                 <div class="border-cor border-post-style border-post-w">
                     <div class="ml-2">
+                        <img src="{{ url($user->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
                         <a href={{route('perfil', ['usuario' => $publi->usuario])}} class="text-color">
                             {{$publi->usuario}}
                         </a>
                     </div>
-                    <div class="text-xs mb-1 ml-2 mt-1">
+                    <div class="text-xs mb-4 ml-2 mt-1">
                         {{$publi->text}}
                     </div>
                     <div class="bg-gray-100 text-xxs flex pr-2 rounded-sm h-4 text-color ml-2">
