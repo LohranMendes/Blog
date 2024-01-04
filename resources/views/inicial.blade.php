@@ -53,8 +53,8 @@
                     <div class="text-xs mb-4 ml-2 mt-1">
                         {{$publi->text}}
                     </div>
-                    <div class="bg-gray-100 text-xxs flex pr-2 rounded-sm h-4 text-color ml-2">
-                        <span class="mr-2">
+                    <div class="bg-gray-100 text-xs flex items-center pr-2 rounded-sm h-6 text-color">
+                        <span class="mr-2 ml-2">
                             <i class="bi bi-heart-fill"></i>
                             Curtir
                         </span>

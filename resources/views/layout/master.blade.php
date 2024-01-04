@@ -3,6 +3,7 @@
     <head>
         @include('layout.head')
         <title>@yield('titulo')</title>
+        @stack('script-js')
     </head>
 
     <body>
@@ -13,6 +14,7 @@
 
         @include('layout.footer')
 
+        @stack('scripts')
     </body>
 </html>
 

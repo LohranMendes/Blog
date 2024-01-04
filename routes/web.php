@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PaginasController;
 use App\Http\Controllers\AutenticacaoController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PublicacaoController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,8 @@ Route::get('/deslogar', [AutenticacaoController::class, 'desconectar'])->name('d
 
 #Rotas do Perfil e Configurações
 Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil');
+Route::post('/perfil/{usuario}', [PerfilController::class, 'editarPerfil'])->name('editar');
+Route::get('/imagem/{usuario}/{nomeImagem}', [PerfilController::class, 'retornarImagem'])->where('nomeImagem');
 
 #Rotas de Publicacões
 Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp');
