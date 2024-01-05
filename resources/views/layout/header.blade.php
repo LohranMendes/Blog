@@ -13,7 +13,12 @@
                     <div x-data="{open: false}" class="lg:inline hidden">
                         <button x-on:click="open =! open" class="inline-flex"> 
                             <span class="mr-1 font_header"> 
-                                <img src="{{ url($user->foto_perfil) }}" alt="Foto do Perfil" class="h-5 w-5 inline-block"> {{ $user->usuario }}
+                                @if($user->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
+                                    <img src="{{ url($user->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
+                                @else
+                                    <img src="{{ route('imagem', ['usuario' => $user->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
+                                @endif 
+                                {{ $user->usuario }}
                             </span> 
                             <i class="bi bi-caret-down-fill icone_menu"></i>
                         </button>

@@ -59,9 +59,7 @@ class AutenticacaoController extends Controller
         $data['usuario'] = $request->apelido;
         $data['email'] = $request->email;
         $data['senha'] = Hash::make($request->senha);
-        $data['foto_perfil'] = 'null';
-        $data['capa_perfil'] = 'null';
-
+        
         $user = User::create($data);
 
         if($user){

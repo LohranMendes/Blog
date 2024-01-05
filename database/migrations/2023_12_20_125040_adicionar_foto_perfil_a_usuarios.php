@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->string('capa_perfil')->after('senha')->nullable()->default(NULL);;
-            $table->string('foto_perfil')->after('senha')->nullable()->default(NULL);
+            $table->string('capa_perfil')->after('senha')->nullable()->default('img/capa-de-perfil.jpg');
+            $table->string('foto_perfil')->after('senha')->nullable()->default('img/foto-de-perfil-de-usuario.jpg');
         });
     }
 

@@ -14,6 +14,8 @@
 
         @include('layout.footer')
 
+        @stack('modal_um')
+
         @stack('scripts')
     </body>
 </html>

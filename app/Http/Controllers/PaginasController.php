@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\DB;
 class PaginasController extends Controller
 {
     protected function inicialPagina () {
-        $user = User::select('usuario', 'foto_perfil')->where('id_usuario', Auth::id())->first();
+        $user = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil')->where('id_usuario', Auth::id())->first();
 
         $posts = new publicacaoModel;
-
         $publis = $posts->postsUsuarios();
 
         return view("inicial", compact('user', 'publis'));

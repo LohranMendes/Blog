@@ -31,7 +31,7 @@ Route::get('/deslogar', [AutenticacaoController::class, 'desconectar'])->name('d
 #Rotas do Perfil e Configurações
 Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil');
 Route::post('/perfil/{usuario}', [PerfilController::class, 'editarPerfil'])->name('editar');
-Route::get('/imagem/{usuario}/{nomeImagem}', [PerfilController::class, 'retornarImagem'])->where('nomeImagem');
+Route::get('/perfil/{usuario}/fotoperfil', [PerfilController::class, 'getImagemPerfil'])->name('imagem');
 
 #Rotas de Publicacões
 Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp');
