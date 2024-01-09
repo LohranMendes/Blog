@@ -11,12 +11,10 @@
         <div class="col-span-6">
             <div class="bg-gray-800 h-banner-perfil relative flex items-center text-2xl">
                 <div class="w-full justify-between">
-                    <div class="h-20 w-20 absolute bottom-5 left-8 border-cor border-w inline-flex items-center text-white ">
-                        @if($u->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
-                            <img src="{{ url($u->foto_perfil) }}" alt="Foto do Perfil">
-                        @else
+                    <div class="absolute bottom-5 left-8 inline-flex items-center text-white">
+                        <div class="img-container border-cor border-w">
                             <img src="{{ route('imagem', ['usuario' => $u->usuario]) }}" alt="Foto do Perfil">
-                        @endif
+                        </div>
                         <span class="pl-2"> {{$u['nome']}} </span>
                         <span class="pl-2"> {{$u['sobrenome']}} </span>
                     </div>
