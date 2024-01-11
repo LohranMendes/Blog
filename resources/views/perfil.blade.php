@@ -3,6 +3,9 @@
 @push('script-js')
     <script src="{{ asset('js/modal.js') }}"></script> 
 @endpush
+@push('script-js')
+    <script src="{{ asset('js/publicacoes.js') }}"></script> 
+@endpush
 
 @section('conteudo')
     <div class=" h-visor grid grid-cols-8">
@@ -13,7 +16,7 @@
                 <div class="w-full justify-between">
                     <div class="absolute bottom-5 left-8 inline-flex items-center text-white">
                         <div class="img-container border-cor border-w">
-                            <img src="{{ route('imagem', ['usuario' => $u->usuario]) }}" alt="Foto do Perfil">
+                            <img src="{{ route('imagem', ['usuario' => $user['usuario']]) }}" alt="Foto do Perfil">
                         </div>
                         <span class="pl-2"> {{$u['nome']}} </span>
                         <span class="pl-2"> {{$u['sobrenome']}} </span>
@@ -43,38 +46,40 @@
                     </form>
                 </div>
             @endif
-
-            @foreach ($publis as $publi)
-                <div class="mt-2 mr-2 ml-2">
-                    <div class="border-cor border-post-style border-post-w">
-                        <div class="ml-2 text-color">
-                            @if($u->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
-                                <img src="{{ url($u->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
-                            @else
-                                <img src="{{ route('imagem', ['usuario' => $publi->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
-                            @endif
-                            {{$publi->usuario}}
-                        </div>
-                        <div class="text-xs mb-4 ml-2 mt-1">
-                            {{$publi->text}}
-                        </div>
-                        <div class="bg-gray-100 text-xs flex items-center pr-2 rounded-sm h-6 text-color">
-                            <span class="mr-2 ml-2">
-                                <i class="bi bi-heart-fill"></i>
-                                Curtir
-                            </span>
-                            <span class="mr-2"> 
-                                <i class="bi bi-chat-left-fill"></i>
-                                Comentar 
-                            </span>
-                            <span>
-                                <i class="bi bi-share-fill"></i>
-                                Compartilhar
-                            </span>
+            
+            <div class="publicacoes">
+                @foreach ($publis as $publi)
+                    <div class="mt-2 mr-2 ml-2">
+                        <div class="border-cor border-post-style border-post-w">
+                            <div class="ml-2 text-color">
+                                @if($u->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
+                                    <img src="{{ url($u->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
+                                @else
+                                    <img src="{{ route('imagem', ['usuario' => $publi->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
+                                @endif
+                                {{$publi->usuario}}
+                            </div>
+                            <div class="text-xs mb-4 ml-2 mt-1">
+                                {{$publi->text}}
+                            </div>
+                            <div class="bg-gray-100 text-xs flex items-center pr-2 rounded-sm h-6 text-color">
+                                <span class="mr-2 ml-2">
+                                    <i class="bi bi-heart-fill"></i>
+                                    Curtir
+                                </span>
+                                <span class="mr-2"> 
+                                    <i class="bi bi-chat-left-fill"></i>
+                                    Comentar 
+                                </span>
+                                <span>
+                                    <i class="bi bi-share-fill"></i>
+                                    Compartilhar
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
 
         <div class="col-span-1 bg-gray-perfil border-sidebar"></div>
@@ -128,5 +133,8 @@
 
     @push('scripts')
         <script src="{{ asset('js/modal.js') }}"></script> 
+    @endpush
+    @push('scripts')
+        <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection

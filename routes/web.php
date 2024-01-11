@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/inicial', [PaginasController::class, 'inicialPagina'])->name('inicial');
+Route::get('/inicial', [PaginasController::class, 'inicialPagina'])->name('inicial')->middleware('auth');
 
 #Rotas de Autenticação
 Route::get('/registro', [PaginasController::class, 'registroPagina'])->name('registro');
@@ -26,12 +26,12 @@ Route::post('/registro', [AutenticacaoController::class, 'registroPost'])->name(
 Route::get('/', [PaginasController::class, 'loginPagina'])->name('login');
 Route::post('/', [AutenticacaoController::class, 'loginPost'])->name('loginPost'); 
 
-Route::get('/deslogar', [AutenticacaoController::class, 'desconectar'])->name('deslogar');
+Route::get('/deslogar', [AutenticacaoController::class, 'desconectar'])->name('deslogar')->middleware('auth');
 
 #Rotas do Perfil e Configurações
-Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil');
-Route::post('/perfil/{usuario}', [PerfilController::class, 'editarPerfil'])->name('editar');
-Route::get('/perfil/{usuario}/fotoperfil', [PerfilController::class, 'getImagemPerfil'])->name('imagem');
+Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil')->middleware('auth');
+Route::post('/perfil/{usuario}', [PerfilController::class, 'editarPerfil'])->name('editar')->middleware('auth');
+Route::get('/perfil/{usuario}/fotoperfil', [PerfilController::class, 'getImagemPerfil'])->name('imagem')->middleware('auth');
 
 #Rotas de Publicacões
-Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp');
+Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp')->middleware('auth');

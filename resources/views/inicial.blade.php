@@ -3,6 +3,9 @@
 @push('script-js')
     <script src="{{ asset('js/modal.js') }}"></script> 
 @endpush
+@push('script-js')
+    <script src="{{ asset('js/publicacoes.js') }}"></script> 
+@endpush
 
 @section('conteudo')
     <div class="grid grid-cols-10 gap-0">
@@ -52,39 +55,41 @@
                 </form>
             </div>
 
-            @foreach ($publis as $publi)
-                <div class="mt-2">
-                    <div class="border-cor border-post-style border-post-w">
-                        <div class="ml-2">
-                            @if($publi->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
-                                <img src="{{ url($publi->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
-                            @else
-                                <img src="{{ route('imagem', ['usuario' => $publi->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
-                            @endif
-                            <a href={{route('perfil', ['usuario' => $publi->usuario])}} class="text-color">
-                                {{$publi->usuario}}
-                            </a>
-                        </div>
-                        <div class="text-xs mb-4 ml-2 mt-1">
-                            {{$publi->text}}
-                        </div>
-                        <div class="bg-gray-100 text-xs flex items-center pr-2 rounded-sm h-6 text-color">
-                            <span class="mr-2 ml-2">
-                                <i class="bi bi-heart-fill"></i>
-                                Curtir
-                            </span>
-                            <span class="mr-2"> 
-                                <i class="bi bi-chat-left-fill"></i>
-                                Comentar 
-                            </span>
-                            <span>
-                                <i class="bi bi-share-fill"></i>
-                                Compartilhar
-                            </span>
+            <div class="publicacoes">
+                @foreach ($publis as $publi)
+                    <div class="mt-2">
+                        <div class="border-cor border-post-style border-post-w">
+                            <div class="ml-2">
+                                @if($publi->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
+                                    <img src="{{ url($publi->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
+                                @else
+                                    <img src="{{ route('imagem', ['usuario' => $publi->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
+                                @endif
+                                <a href={{route('perfil', ['usuario' => $publi->usuario])}} class="text-color">
+                                    {{$publi->usuario}}
+                                </a>
+                            </div>
+                            <div class="text-xs mb-4 ml-2 mt-1">
+                                {{$publi->text}}
+                            </div>
+                            <div class="bg-gray-100 text-xs flex items-center pr-2 rounded-sm h-6 text-color">
+                                <span class="mr-2 ml-2">
+                                    <i class="bi bi-heart-fill"></i>
+                                    Curtir
+                                </span>
+                                <span class="mr-2"> 
+                                    <i class="bi bi-chat-left-fill"></i>
+                                    Comentar 
+                                </span>
+                                <span>
+                                    <i class="bi bi-share-fill"></i>
+                                    Compartilhar
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
 
         <aside class="border-sidebar h-visor col-span-2 w-full p-4">
@@ -136,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end mr-2">
-                                <button onclick="fecharModal()" data-modal-hide="perfil-modal" type="submit" class="text-white mb-2 btn-cor hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                <button onclick="fecharModal()" name="pi" data-modal-hide="perfil-modal" type="submit" class="text-white mb-2 btn-cor hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                     Salvar
                                 </button>
                             </div>
@@ -149,5 +154,8 @@
 
     @push('scripts')
         <script src="{{ asset('js/modal.js') }}"></script> 
+    @endpush
+    @push('scripts')
+        <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection
