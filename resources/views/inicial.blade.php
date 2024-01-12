@@ -3,9 +3,6 @@
 @push('script-js')
     <script src="{{ asset('js/modal.js') }}"></script> 
 @endpush
-@push('script-js')
-    <script src="{{ asset('js/publicacoes.js') }}"></script> 
-@endpush
 
 @section('conteudo')
     <div class="grid grid-cols-10 gap-0">
@@ -55,40 +52,8 @@
                 </form>
             </div>
 
-            <div class="publicacoes">
-                @foreach ($publis as $publi)
-                    <div class="mt-2">
-                        <div class="border-cor border-post-style border-post-w">
-                            <div class="ml-2">
-                                @if($publi->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
-                                    <img src="{{ url($publi->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
-                                @else
-                                    <img src="{{ route('imagem', ['usuario' => $publi->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">
-                                @endif
-                                <a href={{route('perfil', ['usuario' => $publi->usuario])}} class="text-color">
-                                    {{$publi->usuario}}
-                                </a>
-                            </div>
-                            <div class="text-xs mb-4 ml-2 mt-1">
-                                {{$publi->text}}
-                            </div>
-                            <div class="bg-gray-100 text-xs flex items-center pr-2 rounded-sm h-6 text-color">
-                                <span class="mr-2 ml-2">
-                                    <i class="bi bi-heart-fill"></i>
-                                    Curtir
-                                </span>
-                                <span class="mr-2"> 
-                                    <i class="bi bi-chat-left-fill"></i>
-                                    Comentar 
-                                </span>
-                                <span>
-                                    <i class="bi bi-share-fill"></i>
-                                    Compartilhar
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+            <div id="publicacoes">
+                
             </div>
         </div>
 
@@ -154,8 +119,7 @@
 
     @push('scripts')
         <script src="{{ asset('js/modal.js') }}"></script> 
-    @endpush
-    @push('scripts')
+        <script> var novasPublicacoes = @json($publis);</script>
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection

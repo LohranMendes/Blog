@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class PublicacaoController extends Controller
 {
-    protected function publiPost (Request $request){
+    public function publiPost (Request $request){
 
         $request->validate([
             'publi' => 'required' 
