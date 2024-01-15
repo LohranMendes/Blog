@@ -1,14 +1,34 @@
-    var conn = new WebSocket('ws://10.100.214.177:8000');
+var conn = new WebSocket('ws://10.100.214.177:8000');
+var atualizado = 0;
 
-    conn.onopen = function(e){
-        console.log("Conexão estabelecida!");
+conn.onopen = function(e){
+    console.log("Conexão estabelecida!");
+
+    const sinal = {
+        status: 'ativo',
+    };
+
+    conn.send(JSON.stringify(sinal));
+}
+
+conn.onmessage = function(e){
+
+    const retorno = JSON.parse(e.data);
+
+    console.log(retorno.atualizado);
+
+    if('atualizado' in retorno){
+        var p = retorno.publicacoes;
+    }
+    else {
+        var p = publicacoes; 
     }
 
-    function carregarPublicacoes() {
+    function carregarPublicacoes(p) {
         var publicacoesContainer = document.getElementById('publicacoes');
         publicacoesContainer.innerHTML = '';
     
-        novasPublicacoes.forEach(function (publi) {
+        p.forEach(function (publi) {
             var div = document.createElement('div');
             div.className = 'mt-2';
     
@@ -46,7 +66,31 @@
             publicacoesContainer.appendChild(div);
         });
     }
-    
-    carregarPublicacoes();
-    
-    setInterval(carregarPublicacoes, 5000);
+
+    carregarPublicacoes(p);
+}
+
+conn.onerror = function (e) {
+    console.error('WebSocket Error:', e);
+};
+
+conn.onclose = function (e) {
+    console.log('WebSocket Closed:', e);
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    var formulario = document.getElementById("formPubli");
+
+    formulario.addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const padrao = {
+            tipo: 'novaPublicacao',
+            usuario: usuario.usuario,
+            texto: document.getElementById("publi").value,
+        }
+
+        conn.send(JSON.stringify(padrao));
+    });
+});
+

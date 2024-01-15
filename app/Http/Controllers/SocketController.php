@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-use App\Http\Controllers\PublicacaoController;
+use App\Models\publicacaoModel;
+use App\Models\User;
 
 class SocketController extends Controller implements MessageComponentInterface
 {
@@ -23,15 +23,28 @@ class SocketController extends Controller implements MessageComponentInterface
     public function onMessage(ConnectionInterface $conn, $msg)
     {
         $data = json_decode($msg, true);
+        $banco = [];
 
-        if (isset($data['action']) && $data['action'] === 'create') {
-            $publication = Publication::create([
-                'user_id' => $data['user_id'],
-                'content' => $data['content'],
-            ]);
+        if(isset($data['status']) && $data['status'] === 'ativo'){
+            $confirma = ['status' => 'confirmacao'];
 
             foreach ($this->clients as $client) {
-                $client->send(json_encode($publication));
+                $client->send(json_encode($confirma));
+            }
+        }
+
+        if (isset($data['tipo']) && $data['tipo'] === 'novaPublicacao') {
+            $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
+            $banco['text'] = $data['texto'];
+            publicacaoModel::create($banco);
+
+            $posts = new publicacaoModel;
+            $publicacoes = $posts->postsUsuarios();
+            $atualizado = 1;
+            $dados = compact('publicacoes', 'atualizado');
+
+            foreach ($this->clients as $client) {
+                $client->send(json_encode($dados));
             }
         }
     }

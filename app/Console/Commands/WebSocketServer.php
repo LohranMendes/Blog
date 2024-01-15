@@ -36,7 +36,8 @@ class WebSocketServer extends Command
                     new SocketController()
                 )
             ),
-            8000
+            8000,
+            '10.100.214.177'
         );
 
         $server->run();

@@ -37,14 +37,14 @@
 
         <div class="col-span-6 p-4">
             <div>
-                <form action={{route('pp')}} method="POST">
+                <form id="formPubli" method="POST">
                     @csrf
                     <div class="border-cor border-post-style border-post-w ">
                         <label for="publi" class="text-form-post  mb-1 pl-2"> Crie um novo tópico! </label>
                         <hr class="w-full border-cor mb-2">
                         <textarea id="publi" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui"></textarea>
                         <div class="bg-gray-100 flex justify-end pr-2 rounded-sm">
-                            <button type="submit" class="btn-cor btn-font-size text-white p-1 my-2 rounded-md focus:outline-none">
+                            <button type="submit" id="publiPost" class="btn-cor btn-font-size text-white p-1 my-2 rounded-md focus:outline-none">
                                 Publicar
                             </button>
                         </div>
@@ -118,8 +118,9 @@
     @endpush
 
     @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="{{ asset('js/modal.js') }}"></script> 
-        <script> var novasPublicacoes = @json($publis);</script>
+        <script> var publicacoes = @json($publis); var usuario = @json($user)</script>
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection
