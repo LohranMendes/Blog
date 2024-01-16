@@ -39,7 +39,7 @@
                             <i class="bi bi-list icone_menu_2"></i>
                         </button>
 
-                        <div x-show="sidebar" @click.away="siderbar = false" class="g:hidden fixed esmeralda inset-0 bg-opacity-85">
+                        <div x-show="sidebar" @click.away="siderbar = false" class="g:hidden fixed esmeralda inset-0 z-index-1 bg-opacity-85">
                             <ul class="py-1 text-sm text-white">
                                 <li> 
                                     <a href="{{route('inicial')}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-800"> Inicial </a> 

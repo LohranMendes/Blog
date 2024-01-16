@@ -2,13 +2,11 @@
 @section('titulo', 'Página Inicial')
 @push('script-js')
     <script src="{{ asset('js/modal.js') }}"></script> 
-@endpush
-@push('script-js')
     <script src="{{ asset('js/publicacoes.js') }}"></script> 
 @endpush
 
 @section('conteudo')
-    <div class=" h-visor grid grid-cols-8">
+    <div class="h-visor grid grid-cols-8">
         <div class="col-span-1 bg-gray-perfil border-homebar"></div>
 
         <div class="col-span-6">
@@ -133,8 +131,6 @@
 
     @push('scripts')
         <script src="{{ asset('js/modal.js') }}"></script> 
-    @endpush
-    @push('scripts')
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection
