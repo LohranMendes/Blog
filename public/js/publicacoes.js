@@ -1,4 +1,4 @@
-var conn = new WebSocket('ws://10.100.214.177:8000');
+var conn = new WebSocket('ws://localhost:8002');
 var atualizado = 0;
 
 conn.onopen = function(e){
@@ -83,14 +83,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     formulario.addEventListener("submit", function(event) {
         event.preventDefault();
-        
-        const padrao = {
-            tipo: 'novaPublicacao',
-            usuario: usuario.usuario,
-            texto: document.getElementById("publi").value,
-        }
 
-        conn.send(JSON.stringify(padrao));
+        if(document.getElementById("publi").value === ''){
+            console.log('é vazio');
+        }
+        else {
+            const padrao = {
+                tipo: 'novaPublicacao',
+                usuario: usuario.usuario,
+                texto: document.getElementById("publi").value,
+            }
+
+            conn.send(JSON.stringify(padrao));
+        }
     });
 });
 

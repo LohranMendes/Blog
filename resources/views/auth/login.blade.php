@@ -39,6 +39,14 @@
             <div class="flex justify-center mt-3">
                 <a href="{{route('registro')}}" class="link fs-sml">Não tem conta? Cadastra-se!</a>
             </div>
+            @if(session('error'))
+                <div class="flex justify-center mt-3">
+                    <div class="bg-red-400 rounded-md text-white p-2 text-sm shadow-sm">
+                        <i class="bi bi-exclamation-triangle"></i> 
+                        <span class="font-medium ml-1">Atenção! </span> {{ session('error') }}
+                    </div>
+                </div>
+            @endif
         </div>
         
     </div>

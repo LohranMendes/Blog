@@ -3,32 +3,6 @@
 
 @section('conteudo')
 <div class="block">
-    @if(session('error'))
-        <div class="flex justify-center">
-            <div class="ml-10 bg-red-400 rounded-md text-white p-2 w-1/4 text-sm shadow-sm">
-                <i class="bi bi-exclamation-triangle"></i> 
-                <span class="font-medium ml-1">Atenção! </span> {{ session('error') }}
-            </div>
-        </div>
-    @endif
-
-    @if($errors->has('csenha') || $errors->has('senha'))
-        <div class="flex justify-center">
-            <div class=" bg-red-400 rounded-md text-white w-1/4 p-2 text-sm shadow-sm">
-                @if($errors->has('csenha'))
-                    <span class="text-white">
-                        <i class="bi bi-exclamation-triangle pr-1"></i> {{ $errors->first('csenha') }}
-                    </span>
-                @endif
-                @if($errors->has('senha'))
-                    <span class="text-white block">
-                        <i class="bi bi-exclamation-triangle pr-1"></i> {{ $errors->first('senha') }}
-                    </span>
-                @endif
-            </div>
-        </div>
-    @endif
-
     <div class="card tela_altura_card_2 w-2/5 mx-auto flex items-center justify-center">
         <div class="block">
             <span class="text-2xl ml-10">Registre-se!</span>
@@ -81,5 +55,35 @@
     <div class="flex justify-center mt-3">
         <a href="{{route('login')}}" class="link fs-sml">Tem uma conta? Faça login!</a>
     </div>
+        @if(session('error'))
+        <div class="flex justify-center mt-3">
+            <div class="flex bg-red-400 rounded-md text-white p-2 text-sm shadow-sm">
+                <i class="bi bi-exclamation-triangle"></i> 
+                <span class="font-medium ml-1 pr-1">Atenção! </span> {{ session('error') }}
+            </div>
+        </div>
+        @endif
+
+        @if($errors->has('csenha') || $errors->has('senha'))
+            @if($errors->has('csenha'))
+                <div class="flex justify-center mt-2">
+                    <div class="flex bg-red-400 rounded-md text-white p-2 text-sm shadow-sm">
+                        <span class="text-white mb-1">
+                            <i class="bi bi-exclamation-triangle pr-1"></i> {{ $errors->first('csenha') }}
+                        </span>
+                    </div>
+                </div>
+            @endif
+        
+            @if($errors->has('senha'))
+                <div class="flex justify-center mt-2">
+                    <div class="flex bg-red-400 rounded-md text-white p-2 text-sm shadow-sm">
+                        <span class="text-white">
+                            <i class="bi bi-exclamation-triangle pr-1"></i> {{ $errors->first('senha') }}
+                        </span>
+                    </div>
+                </div>
+            @endif
+        @endif
 </div>
 @endsection
