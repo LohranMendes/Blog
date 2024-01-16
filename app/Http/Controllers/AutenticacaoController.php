@@ -19,7 +19,7 @@ class AutenticacaoController extends Controller
         $user = User::where("email", $request->email)->first();
 
         if(!$user){
-            return redirect()->intended(route("login"))->with("error", "E-mail inválido.");
+            return redirect()->intended(route("login"))->with("error", "Erro no login. Verifique os dados inseridos.");
         }
 
         if(password_verify($request->senha, $user->senha)){

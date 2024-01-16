@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end mr-2">
-                                <button onclick="fecharModal()" name="pi" data-modal-hide="perfil-modal" type="submit" class="text-white mb-2 btn-cor hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                <button onclick="fecharModal()" name="epi" data-modal-hide="perfil-modal" type="submit" class="text-white mb-2 btn-cor hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                     Salvar
                                 </button>
                             </div>
@@ -118,9 +118,8 @@
     @endpush
 
     @push('scripts')
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="{{ asset('js/modal.js') }}"></script> 
-        <script> var publicacoes = @json($publis); var usuario = @json($user)</script>
+        <script> var publicacoes = @json($publis); var usuario = @json($user);</script>
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection

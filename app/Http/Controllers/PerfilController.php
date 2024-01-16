@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class PerfilController extends Controller
 {
@@ -19,11 +20,11 @@ class PerfilController extends Controller
         ]);
 
         if ($request->nomeUsuario != null){
-
+            $this->alterarNome($request->nomeUsuario);
         }
 
         if ($request->sobrenomeUsuario != null){
-
+            $this->alterarSobrenome($request->sobrenomeUsuario);
         }
 
         if ($request->foto_perfil != null){
@@ -34,11 +35,18 @@ class PerfilController extends Controller
 
         }
 
+        if($request->has('epi')){
+            return Redirect::route('inicial');
+        }
+
         $usuario['usuario'] = User::where('id_usuario', Auth::id())->value('usuario');
         return Redirect::route('perfil', ['usuario' => $usuario['usuario']]);
     }
 
     protected function addFotoPerfil($imagem){
+        $arq = User::where('id_usuario', Auth::id())->value('foto_perfil');
+        Storage::disk('public')->delete($arq);
+
         $img = $imagem;
         $nomeImg = Auth::user()->usuario . '_' . time() . '.' . $img->getClientOriginalExtension();
         $caminhoImg = 'users/' . Auth::user()->usuario;
@@ -57,4 +65,11 @@ class PerfilController extends Controller
         return response()->file(storage_path("app/public/{$caminhoImagem}"));
     }
 
+    public function alterarNome($nome){
+        User::where('id_usuario', Auth::id())->update(['nome' => $nome]);
+    }
+
+    public function alterarSobrenome($sobrenome){
+        User::where('id_usuario', Auth::id())->update(['sobrenome' => $sobrenome]);
+    }
 }

@@ -9,5 +9,3 @@ function fecharModal(){
     modal.classList.add('hidden');
     modal.classList.remove('flex');
 }
-
-console.log(document.height());
