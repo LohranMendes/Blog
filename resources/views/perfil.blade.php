@@ -5,23 +5,32 @@
 @endpush
 
 @section('conteudo')
-    <div class="h-visor grid grid-cols-8">
+    <div class="grid grid-cols-8">
         <div class="col-span-1 bg-gray-perfil border-homebar"></div>
 
         <div class="col-span-6">
-            <div class="bg-gray-800 h-banner-perfil relative flex items-center text-2xl">
+            <div class="bg-gray-800 relative flex items-center text-2xl">
                 <div class="w-full justify-between">
-                    <div class="absolute bottom-5 left-8 inline-flex items-center text-white">
-                        <div class="img-container border-cor border-w">
-                            <img src="{{ route('imagem', ['usuario' => $user['usuario']]) }}" alt="Foto do Perfil">
+                    <div class="img-container-2">
+                        <img src="{{ asset('img/banner_um.jpg')}}" alt="Capa do Perfil">
+                        <div class="absolute bottom-2 left-8 w-full mb-2">
+                            <div class="flex items-center justify-between text-white w-11/12">
+                                <div class="inline-flex items-center">
+                                    <div class="img-container border-cor border-w">
+                                        <img src="{{ route('imagem', ['usuario' => $user['usuario']]) }}" alt="Foto do Perfil">
+                                    </div>
+                                    <div>
+                                        <span class="pl-2"> {{$u['nome']}} </span>
+                                        <span class="pl-2"> {{$u['sobrenome']}} </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" onclick="mostrarModal()" class="rounded-md btn-cor p-1 text-base">
+                                        Editar Perfil
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <span class="pl-2"> {{$u['nome']}} </span>
-                        <span class="pl-2"> {{$u['sobrenome']}} </span>
-                    </div>
-                    <div class="h-15 w-50 absolute bottom-10 right-8 items-center text-white ">
-                        <button type="button" onclick="mostrarModal()" class="rounded-md btn-cor p-1 text-base">
-                            Editar Perfil
-                        </button>
                     </div>
                 </div>
             </div>
