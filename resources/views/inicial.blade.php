@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <aside class="border-sidebar h-visor col-span-2 w-full p-4">
+        <aside class="border-sidebar col-span-2 w-full p-4">
             <div>
                 <ul>
                     <li>

@@ -13,22 +13,24 @@
                 <div class="w-full justify-between">
                     <div class="img-container-2">
                         <img src="{{ asset('img/banner_um.jpg')}}" alt="Capa do Perfil">
-                        <div class="absolute bottom-2 left-8 w-full mb-2">
-                            <div class="flex items-center justify-between text-white w-11/12">
-                                <div class="inline-flex items-center">
-                                    <div class="img-container border-cor border-w">
+                    </div>
+                    <div class="absolute bottom-2 left-8 w-full mb-2">
+                        <div class="flex items-center justify-between text-white w-11/12">
+                            <div class="inline-flex items-center">
+                                <div class="border-cor border-w">
+                                    <div class="img-container">
                                         <img src="{{ route('imagem', ['usuario' => $user['usuario']]) }}" alt="Foto do Perfil">
-                                    </div>
-                                    <div>
-                                        <span class="pl-2"> {{$u['nome']}} </span>
-                                        <span class="pl-2"> {{$u['sobrenome']}} </span>
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="button" onclick="mostrarModal()" class="rounded-md btn-cor p-1 text-base">
-                                        Editar Perfil
-                                    </button>
+                                    <span class="pl-2"> {{$u['nome']}} </span>
+                                    <span class="pl-2"> {{$u['sobrenome']}} </span>
                                 </div>
+                            </div>
+                            <div>
+                                <button type="button" onclick="mostrarModal()" class="rounded-md btn-cor p-1 text-base">
+                                    Editar Perfil
+                                </button>
                             </div>
                         </div>
                     </div>

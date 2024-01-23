@@ -2,26 +2,36 @@
     <nav>
         <header class="esmeralda p-4 text-white shadow-md">
             <div class="container flex flex-wrap justify-between mx-auto ">
-                <a href={{route('inicial')}} class="inline-block">
-                    <div class="flex items-center">
+                <div class="flex items-center">
+                    <a href={{route('inicial')}} class="inline-flex">
                         <img src="{{ asset('img/esmeralda_logo.png') }}" style="margin-right: 10px;" alt="EsmeraldaBlog Logo">
                         <span class="font_header">EsmeraldaBlog</span>
-                    </div>
-                </a>
+                    </a>
+                </div>
 
                 @if (Auth::check())
                     <div x-data="{open: false}" class="lg:inline hidden">
-                        <button x-on:click="open =! open" class="inline-flex"> 
-                            <span class="mr-1 font_header"> 
-                                @if($user->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
-                                    <img src="{{ url($user->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
-                                @else
-                                    <img src="{{ route('imagem', ['usuario' => $user->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
-                                @endif 
-                                {{ $user->usuario }}
-                            </span> 
-                            <i class="bi bi-caret-down-fill icone_menu"></i>
-                        </button>
+                        <div class="inline-flex items-center">
+                            <div class="border border-white mr-2 mx-auto my-auto">
+                                <input type="text" id="pesquisa" class="pl-1 pesquisa" placeholder="Pesquise aqui.">
+                                <button type="submit" class="border-white mr-1 border-pesquisa">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            <span class="mr-1 font_header">
+                                <a href="{{route('perfil', ['usuario' => $user->usuario])}}">
+                                    @if($user->foto_perfil == 'img/foto-de-perfil-de-usuario.jpg')
+                                        <img src="{{ url($user->foto_perfil) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
+                                    @else
+                                        <img src="{{ route('imagem', ['usuario' => $user->usuario]) }}" alt="Foto do Perfil" class="h-8 w-8 inline-block">
+                                    @endif
+                                    {{ $user->usuario }}
+                                </a>
+                            </span>
+                            <button x-on:click="open =! open">
+                                <i class="bi bi-caret-down-fill icone_menu"></i>
+                            </button>
+                        </div>
 
                         <div x-show="open" @click.away="open = false" class="absolute z-10 right-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                             <ul class="py-1 text-sm text-gray-800">

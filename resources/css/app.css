@@ -221,13 +221,14 @@
 }
 
 .img-container {
-    max-width: 5rem; 
+    width: auto; 
     max-height: 5rem;
     overflow: hidden;
+    z-index: 2;
 }
 
 .img-container img {
-    width: auto;
+    max-width: 5rem;
     max-height: auto;
 }
 
@@ -240,6 +241,11 @@
 .img-container-2 img {
     width: 110rem;
     max-height: auto;
-    z-index: 1;
 }
+
+.pesquisa:focus {
+    outline: thick white;
+    color: black;
+}
+
 
