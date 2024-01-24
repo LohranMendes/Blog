@@ -13,10 +13,12 @@
                     <div x-data="{open: false}" class="lg:inline hidden">
                         <div class="inline-flex items-center">
                             <div class="border border-white mr-2 mx-auto my-auto">
-                                <input type="text" id="pesquisa" class="pl-1 pesquisa" placeholder="Pesquise aqui.">
+                                <input type="text" id="pesquisa" class="pl-1 pesquisa" placeholder="Pesquise aqui">
                                 <button type="submit" class="border-white mr-1 border-pesquisa">
                                     <i class="bi bi-search"></i>
                                 </button>
+                            </div>
+                            <div id="menu_search">
                             </div>
                             <span class="mr-1 font_header">
                                 <a href="{{route('perfil', ['usuario' => $user->usuario])}}">
@@ -52,6 +54,15 @@
                         <div x-show="sidebar" @click.away="siderbar = false" class="g:hidden fixed esmeralda inset-0 z-index-1 bg-opacity-85">
                             <ul class="py-1 text-sm text-white">
                                 <li> 
+                                    <div class="inline-flex ml-3">
+                                        <div class="border border-white mr-2 mx-auto my-auto">
+                                            <input type="text" id="search" class="pl-1 pesquisa" placeholder="Pesquise aqui">
+                                            <button type="submit" class="border-white mr-1 border-pesquisa">
+                                                <i class="bi bi-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <li> 
                                     <a href="{{route('inicial')}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-800"> Inicial </a> 
                                 </li>
                                 <li> 
@@ -75,3 +86,5 @@
         </header>
     </nav>
 @endif
+
+

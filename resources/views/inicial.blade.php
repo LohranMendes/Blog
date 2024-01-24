@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script src="{{ asset('js/modal.js') }}"></script> 
+    <script> var publicacoes = @json($publis); var usuario = @json($user);</script>
 @endpush
 
 @section('conteudo')
@@ -118,8 +118,8 @@
     @endpush
 
     @push('scripts')
+        <script src="{{asset('js/gerais.js')}}"></script>
         <script src="{{ asset('js/modal.js') }}"></script> 
-        <script> var publicacoes = @json($publis); var usuario = @json($user);</script>
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection

@@ -7,7 +7,6 @@
     </head>
 
     <body>
-
         @include('layout.header')
 
         @yield('conteudo')

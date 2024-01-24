@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\buscaModel;
 use App\Models\publicacaoModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,6 +18,13 @@ class PaginasController extends Controller
         $publis = $posts->postsUsuarios();
 
         return view("inicial", compact('user', 'publis'));
+    }
+
+    protected function busca(){
+        $search = new buscaModel;
+        $s = $search->buscaUsuarios();
+
+        echo json_encode($s);
     }
 
     protected function loginPagina (){

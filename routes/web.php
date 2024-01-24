@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/inicial', [PaginasController::class, 'inicialPagina'])->name('inicial')->middleware('auth');
+Route::get('/buscaUsuario', [PaginasController::class, 'busca']);
 
 #Rotas de Autenticação
 Route::get('/registro', [PaginasController::class, 'registroPagina'])->name('registro');
