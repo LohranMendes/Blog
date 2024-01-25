@@ -6,20 +6,20 @@
 
 @section('conteudo')
     <div class="grid grid-cols-8">
-        <div class="col-span-1 bg-gray-perfil border-homebar"></div>
+        <div class="col-span-1 bg-gray-perfil h-visor border-homebar"></div>
 
         <div class="col-span-6">
             <div class="bg-gray-800 relative flex items-center text-2xl">
                 <div class="w-full justify-between">
                     <div class="img-container-2">
-                        <img src="{{ asset('img/banner_um.jpg')}}" alt="Capa do Perfil">
+                        <img src="{{ route('capa', ['usuario' => $u['usuario']]) }}" alt="Capa do Perfil">
                     </div>
                     <div class="absolute bottom-2 left-8 w-full mb-2">
                         <div class="flex items-center justify-between text-white w-11/12">
                             <div class="inline-flex items-center">
                                 <div class="border-cor border-w">
                                     <div class="img-container">
-                                        <img src="{{ route('imagem', ['usuario' => $user['usuario']]) }}" alt="Foto do Perfil">
+                                        <img src="{{ route('imagem', ['usuario' => $u['usuario']]) }}" alt="Foto do Perfil" class="h-20 w-20">
                                     </div>
                                 </div>
                                 <div>
@@ -44,7 +44,7 @@
                         <div class="border-cor border-post-style border-post-w ">
                             <label for="publi" class="text-form-post  mb-1 pl-2"> Crie um novo tópico! </label>
                             <hr class="w-full border-cor mb-2">
-                            <textarea id="publi" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui"></textarea>
+                            <textarea id="publi" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui" maxlength="255"></textarea>
                             <div class="bg-gray-100 flex justify-end pr-2 rounded-sm">
                                 <button type="submit" id="publiPost" class="btn-cor btn-font-size-2 text-white p-1 my-2 rounded-md focus:outline-none">
                                     Publicar
@@ -112,6 +112,7 @@
     @push('scripts')
         <script src="{{ asset('js/modal.js') }}"></script>
         <script> var publicacoes = @json($publis); var usuario = @json($user);</script>
+        <script src="{{asset('js/gerais.js')}}"></script>
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection

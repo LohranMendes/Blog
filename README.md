@@ -15,7 +15,7 @@ Passo : Para inicializar um servidor, execute o comando "php artisan serve".
 Para rede local: php artisan serve --seuip --port 8000
 
 Passo : Para inicializar o tailwindcss, execute o comando "npm run dev" 
-Para rede local: "npm run dev -- --host=seuip --port=8000"
+Para rede local: "npm run dev -- --host=seuip --port=8001
 
 Passo : Para inicializar o websocket, execute o comando "php artisan websocket:init"
 

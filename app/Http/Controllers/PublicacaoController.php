@@ -13,10 +13,11 @@ class PublicacaoController extends Controller
     public function publiPost (Request $request){
 
         $request->validate([
-            'publi' => 'required' 
+            'publi' => 'required|max:255' 
         ]);
 
         $banco = [];
+
 
         $banco['text'] = $request->publi;
         

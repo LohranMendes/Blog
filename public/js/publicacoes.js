@@ -1,4 +1,4 @@
-var conn = new WebSocket('ws://localhost:8002');
+var conn = new WebSocket('ws://10.100.214.177:8002');
 var atualizado = 0;
 
 conn.onopen = function(e){
@@ -32,14 +32,19 @@ conn.onmessage = function(e){
     
             var html = `
                 <div class="border-cor border-post-style border-post-w">
-                    <div class="ml-2">
-                    ${publi.foto_perfil === 'img/foto-de-perfil-de-usuario.jpg' ? 
-                        `<img src="${publi.foto_perfil}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`:
-                        window.location.href === 'http://' + window.location.hostname + ':8000/inicial' ? 
-                            `<img src="perfil/${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">` :
-                            `<img src="${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`
-                    }
-                        <a href=perfil/${publi.usuario} class="text-color">${publi.usuario}</a>
+                    <div class="ml-2 flex items-center">
+                        ${publi.foto_perfil === 'img/foto-de-perfil-de-usuario.jpg' ? 
+                            `<img src="${publi.foto_perfil}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`:
+                            window.location.href === 'http://' + window.location.hostname + ':8000/inicial' ? 
+                                `<img src="perfil/${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">` :
+                                `<img src="${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`
+                        }
+                        <div class="flex justify-between w-full">
+                            <a href=perfil/${publi.usuario} class="text-color ml-2">${publi.usuario}</a>
+                            <button type="button" class="btn_excluir">
+                                <i class="bi bi-trash mr-2 text-red-600"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="text-xs mb-4 ml-2 mt-1">
                         ${publi.text}
@@ -63,6 +68,10 @@ conn.onmessage = function(e){
     
             div.innerHTML = html;
             publicacoesContainer.appendChild(div);
+
+            $(div).find('.btn_excluir').on('click', function(){
+                console.log('excluir');
+            });
         });
     }
 
@@ -79,6 +88,7 @@ conn.onclose = function (e) {
 
 document.addEventListener("DOMContentLoaded", function() {
     var formulario = document.getElementById("formPubli");
+    var textarea = document.getElementById("publi");
 
     formulario.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -93,8 +103,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 texto: document.getElementById("publi").value,
             }
 
-            conn.send(JSON.stringify(padrao));
+            if(padrao.texto.length <= 255){
+                conn.send(JSON.stringify(padrao));
+                textarea.value = '';
+            }
         }
     });
+
 });
 

@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if(input != null){
         input.onkeyup = function() {busca()};
-
-        input.onblur = function() {limparMenu()};
+        menu.onmouseleave = function() {limparMenu()};
         
         function busca() {
             var entrada = input.value.toLowerCase();
@@ -18,8 +17,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 url: '/buscaUsuario',
                 success(op){
                     limparMenu();
-                    var s = JSON.parse(op);
-                    loopBusca(s, entrada);           
+                    if(entrada != ''){
+                        var s = JSON.parse(op);
+                        loopBusca(s, entrada);
+                    }           
                 }
             })
         }
@@ -31,33 +32,37 @@ document.addEventListener("DOMContentLoaded", function() {
         var html = '<ul>';
     
         for (var i = 0; i < s.length; i++) {
-            var u = s[i].usuario.toLowerCase();
-            
+            var u = s[i].usuario.toLowerCase();            
             if (u.indexOf(entrada) > -1 && input.value !== '') {
-                html += `
-                    <a href="perfil/${s[i].usuario}">
-                        <li class="text-md text-blue-500 px-2 py-1 hover:bg-gray-100">
-                            <div class="inline-flex items-center">
-                                <div>
-                                    ${s[i].foto_perfil === 'img/foto-de-perfil-de-usuario.jpg' ? 
-                                    `<img src="${s[i].foto_perfil}" alt="Foto do Perfil" class="h-12 w-12 mr-6">`:
-                                    window.location.href === 'http://' + window.location.hostname + ':8000/inicial' ? 
-                                        `<img src="perfil/${s[i].usuario}/fotoperfil" alt="Foto do Perfil" class="h-12 w-12 mr-6">` :
-                                        `<img src="${s[i].usuario}/fotoperfil" alt="Foto do Perfil" class="h-12 w-12 mr-6">`
-                                     }
-                                </div>
-                                <div>
-                                    <span class="mr-2"> ${s[i].nome} ${s[i].sobrenome}</span>
-                                    <span class="text-xs mr-2"> ${s[i].usuario}</span>
-                                </div>
-                            </div>
-                        </li>
-                    </a>
-                `;
-    
+
                 if (i === s.length - 1) {
                     html += '</ul>';
                 }
+                
+                html += `
+                <a href="/perfil/${s[i].usuario}">
+                    <li class="text-md text-blue-500 px-2 py-1 hover:bg-gray-100">
+                        <div class="flex items-center mr-2">
+                            <div>
+                                ${s[i].foto_perfil === 'img/foto-de-perfil-de-usuario.jpg' ? 
+                                `<img src="${s[i].foto_perfil}" alt="Foto do Perfil" class="h-12 w-16">`:
+                                window.location.href === 'http://' + window.location.hostname + ':8000/inicial' ? 
+                                    `<img src="perfil/${s[i].usuario}/fotoperfil" alt="Foto do Perfil" class="h-12 w-16">` :
+                                    `<img src="${s[i].usuario}/fotoperfil" alt="Foto do Perfil" class="h-12 w-16">`
+                                }
+                            </div>
+                            <div class="container justify-center">
+                                <div>
+                                    <span class="ml-2 mr-2 text-color"> ${s[i].nome} ${s[i].sobrenome}</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs mr-2 ml-2 text-color"> ${s[i].usuario}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                `;
             }
         }
     
@@ -68,4 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
     function limparMenu(){
         menu.innerHTML = '';
     }
+
+    $('#menu_search').on('click', function(){
+        console.log("Fui clicado.");
+    })
 });

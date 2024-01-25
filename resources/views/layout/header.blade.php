@@ -12,11 +12,9 @@
                 @if (Auth::check())
                     <div x-data="{open: false}" class="lg:inline hidden">
                         <div class="inline-flex items-center">
-                            <div class="border border-white mr-2 mx-auto my-auto">
+                            <div class="bg-white mr-2 mx-auto my-auto">
                                 <input type="text" id="pesquisa" class="pl-1 pesquisa" placeholder="Pesquise aqui">
-                                <button type="submit" class="border-white mr-1 border-pesquisa">
-                                    <i class="bi bi-search"></i>
-                                </button>
+                                <i class="bi bi-search text-color mr-2"></i>
                             </div>
                             <div id="menu_search">
                             </div>

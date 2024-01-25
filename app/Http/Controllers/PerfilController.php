@@ -32,7 +32,7 @@ class PerfilController extends Controller
         }
 
         if ($request->capa_perfil != null){
-
+            $this->addCapaPerfil($request->capa_perfil);
         }
 
         if($request->has('epi')){
@@ -54,11 +54,10 @@ class PerfilController extends Controller
         $img->storeAs($caminhoImg, $nomeImg, 'public');
         $caminhoImagem = $caminhoImg . '/' . $nomeImg;
 
-        User::where('id_usuario', Auth::id())->update(['foto_perfil' => $caminhoImagem]);;
+        User::where('id_usuario', Auth::id())->update(['foto_perfil' => $caminhoImagem]);
     }
 
     public function getImagemPerfil(Request $request){
-
         $u = User::select('foto_perfil')->where('usuario', $request->usuario)->first();
         $caminhoImagem = $u['foto_perfil'];
 
@@ -71,5 +70,26 @@ class PerfilController extends Controller
 
     public function alterarSobrenome($sobrenome){
         User::where('id_usuario', Auth::id())->update(['sobrenome' => $sobrenome]);
+    }
+
+    public function addCapaPerfil($imagem){
+        $arq = User::where('id_usuario', Auth::id())->value('capa_perfil');
+        Storage::disk('public')->delete($arq);
+
+        $img = $imagem;
+        $nomeImg = Auth::user()->usuario . '_Capa_' . time() . '.' . $img->getClientOriginalExtension();
+        $caminhoImg = 'users/' . Auth::user()->usuario;
+
+        $img->storeAs($caminhoImg, $nomeImg, 'public');
+        $caminhoImagem = $caminhoImg . '/' . $nomeImg;
+
+        User::where('id_usuario', Auth::id())->update(['capa_perfil' => $caminhoImagem]);
+    }
+
+    public function getCapaPerfil(Request $request){
+        $u = User::select('capa_perfil')->where('usuario', $request->usuario)->first();
+        $caminhoImagem = $u['capa_perfil'];
+
+        return response()->file(storage_path("app/public/{$caminhoImagem}"));
     }
 }

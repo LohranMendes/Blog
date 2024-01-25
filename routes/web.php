@@ -33,6 +33,7 @@ Route::get('/deslogar', [AutenticacaoController::class, 'desconectar'])->name('d
 Route::get('/perfil/{usuario}', [PaginasController::class, 'perfilPagina'])->name('perfil')->middleware('auth');
 Route::post('/perfil/{usuario}', [PerfilController::class, 'editarPerfil'])->name('editar')->middleware('auth');
 Route::get('/perfil/{usuario}/fotoperfil', [PerfilController::class, 'getImagemPerfil'])->name('imagem')->middleware('auth');
+Route::get('/perfil/{usuario}/capaperfil', [PerfilController::class, 'getCapaPerfil'])->name('capa')->middleware('auth');
 
 #Rotas de Publicacões
 Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp')->middleware('auth');

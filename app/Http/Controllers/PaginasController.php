@@ -36,37 +36,14 @@ class PaginasController extends Controller
     }
 
     protected function perfilPagina ($usuario){
-        $this->verificaImagem();
 
         $u = User::select('id_usuario', 'usuario', 'nome', 'sobrenome', 'foto_perfil')->where('usuario', $usuario)->first();
 
         $posts = new publicacaoModel;
-
         $publis = $posts->postUsuario($u->id_usuario);
 
         $user = User::select('usuario', 'foto_perfil')->where('id_usuario', Auth::id())->first();
 
         return view("perfil", compact('user', 'publis', 'u'));
-    }
-
-    private function verificaImagem () {
-        $resultado = DB::table('usuarios')
-            ->select('foto_perfil')
-            ->where('id_usuario', Auth::id())
-            ->first();
-
-        if (empty($resultado->foto_perfil)) {
-            $this->imagemPadrao();
-        }
-    }
-
-    private function imagemPadrao (){
-        $caminhoImagem = 'img/foto-de-perfil-de-usuario.jpg';
-
-        DB::table('usuarios')
-            ->where('id_usuario', Auth::id())
-            ->update([
-                'foto_perfil' => url($caminhoImagem),
-            ]);
     }
 }

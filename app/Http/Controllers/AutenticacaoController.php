@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\FilesystemAdapter;
 
 class AutenticacaoController extends Controller
 {
@@ -61,6 +63,34 @@ class AutenticacaoController extends Controller
         $data['senha'] = Hash::make($request->senha);
         
         $user = User::create($data);
+
+        $img = public_path('img/foto-de-perfil-de-usuario.jpg');
+        $nomeImg = $request->apelido . '_' . time() . ".jpg";
+        $caminhoImg = 'users/' . $request->apelido;
+        $caminhoImagem = $caminhoImg . '/' . $nomeImg;
+        if (!is_dir(public_path($caminhoImg))) {
+            mkdir(public_path($caminhoImg), 0755, true);
+        }
+
+        /** @var Illuminate\Filesystem\FilesystemAdapter */
+        $filesystem = Storage::disk('public');
+        $filesystem->putFileAs($caminhoImg, $img, $nomeImg);
+
+        User::where('email', $request->email)->update(['foto_perfil' => $caminhoImagem]);
+
+        $capa = public_path('img/capa-de-perfil.jpg');
+        $capaNome = $request->apelido . '_Capa_' . time() . ".jpg";
+        $caminhoC = 'users/' . $request->apelido;
+        $caminhoCapa = $caminhoImg . '/' . $capaNome;
+        if (!is_dir(public_path($caminhoC))) {
+            mkdir(public_path($caminhoC), 0755, true);
+        }
+
+        /** @var Illuminate\Filesystem\FilesystemAdapter */
+        $filesystem = Storage::disk('public');
+        $filesystem->putFileAs($caminhoC, $capa, $capaNome);
+
+        User::where('email', $request->email)->update(['capa_perfil' => $caminhoCapa]);
 
         if($user){
             return redirect()->intended(route('login'))->with('sucess', 'O usuário foi registrado com sucesso.');
