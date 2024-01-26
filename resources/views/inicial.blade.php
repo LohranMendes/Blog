@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script> var publicacoes = @json($publis); var usuario = @json($user);</script>
+    <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}} </script>
 @endpush
 
 @section('conteudo')
@@ -27,10 +27,6 @@
             </div>
             
                 <div class="mt-5">
-                    <span>Feed</span>
-                </div>
-            
-                <div class="mt-2">
                     <span>Mensagens</span>
                 </div>
         </div>
@@ -57,8 +53,8 @@
             </div>
         </div>
 
-        <aside class="border-sidebar col-span-2 w-full p-4">
-            <div>
+        <aside class="border-sidebar col-span-2 w-full flex flex-col">
+            <div class="flex-grow p-4 max-h-full">
                 <ul>
                     <li>
                         <span class="">Usuario 2</span>
@@ -68,7 +64,12 @@
                     </li>
                 </ul>
             </div>
-        </aside>
+            
+            <div class="bg-white fixed bottom-0 border-cor border-mss ml-4">
+                <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-60" placeholder="Pesquise aqui">
+                <i class="bi bi-search text-color mr-2"></i>
+            </div>
+       </aside>
     </div>
 
     @push('modal_um')
@@ -121,5 +122,6 @@
         <script src="{{asset('js/gerais.js')}}"></script>
         <script src="{{ asset('js/modal.js') }}"></script> 
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
+        <script src="{{ asset('js/mensagens.js') }}"></script> 
     @endpush
 @endsection

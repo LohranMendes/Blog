@@ -113,6 +113,7 @@
 
 .border-homebar {
     border-right: 0.01rem solid rgb(52 211 153);
+    height: 91.2vh;
 }
 
 .text-form-post {
@@ -252,6 +253,14 @@
     color: black;
 }
 
-.right-38 {
-    right: 9.5rem;
+.right-2\/5 {
+    right: 18%;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+.border-mss {
+    border-width: 3px;
 }

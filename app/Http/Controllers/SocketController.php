@@ -38,13 +38,27 @@ class SocketController extends Controller implements MessageComponentInterface
             $banco['text'] = $data['texto'];
             publicacaoModel::create($banco);
 
-            $posts = new publicacaoModel;
-            $publicacoes = $posts->postsUsuarios();
+            $post = new publicacaoModel;
+            $publicacoes = $post->postsUsuarios();
             $atualizado = 1;
             $dados = compact('publicacoes', 'atualizado');
 
             foreach ($this->clients as $client) {
                 $client->send(json_encode($dados));
+            }
+        }
+
+        if(isset($data['tipo']) && $data['tipo'] === 'excluir'){
+            publicacaoModel::where('id_publi', $data['id_publi'])->delete();
+
+            $posts = new publicacaoModel;
+            $publicacoes = $posts->postsUsuarios();
+            
+            $atualizado = 2;
+            $conteudo = compact('publicacoes', 'atualizado');
+    
+            foreach ($this->clients as $client) {
+                $client->send(json_encode($conteudo));
             }
         }
     }

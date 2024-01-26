@@ -1,4 +1,4 @@
-var conn = new WebSocket('ws://10.100.214.177:8002');
+var conn = new WebSocket('ws://localhost:8002');
 var atualizado = 0;
 
 conn.onopen = function(e){
@@ -14,6 +14,7 @@ conn.onopen = function(e){
 conn.onmessage = function(e){
 
     const retorno = JSON.parse(e.data);
+    console.log(retorno);
 
     if('atualizado' in retorno){
         var p = retorno.publicacoes;
@@ -41,9 +42,10 @@ conn.onmessage = function(e){
                         }
                         <div class="flex justify-between w-full">
                             <a href=perfil/${publi.usuario} class="text-color ml-2">${publi.usuario}</a>
-                            <button type="button" class="btn_excluir">
-                                <i class="bi bi-trash mr-2 text-red-600"></i>
-                            </button>
+                            ${publi.id_usuario === id ?
+                                `<button type="button" class="btn_excluir">
+                                    <i class="bi bi-trash mr-2 text-red-600"></i>
+                                </button>` : ''}
                         </div>
                     </div>
                     <div class="text-xs mb-4 ml-2 mt-1">
@@ -70,7 +72,12 @@ conn.onmessage = function(e){
             publicacoesContainer.appendChild(div);
 
             $(div).find('.btn_excluir').on('click', function(){
-                console.log('excluir');
+                const excluir = {
+                    tipo: 'excluir',
+                    id_publi: publi.id_publi,
+                }
+
+                conn.send(JSON.stringify(excluir));
             });
         });
     }

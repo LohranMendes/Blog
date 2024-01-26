@@ -28,16 +28,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function loopBusca(s, entrada) {
         var div = document.createElement('div');
-        div.className = 'absolute z-10 right-48 mt-4 bg-white divide-y divide-gray-100 rounded-lg shadow w-56 p-2';
+        div.className = 'absolute z-10 right-2/5 mt-4 bg-white divide-y divide-gray-100 rounded-lg shadow w-56 p-2';
         var html = '<ul>';
     
         for (var i = 0; i < s.length; i++) {
             var u = s[i].usuario.toLowerCase();            
             if (u.indexOf(entrada) > -1 && input.value !== '') {
-
-                if (i === s.length - 1) {
-                    html += '</ul>';
-                }
                 
                 html += `
                 <a href="/perfil/${s[i].usuario}">
@@ -63,6 +59,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     </li>
                 </a>
                 `;
+
+                if (i === s.length - 1) {
+                    html += '</ul>';
+                }
             }
         }
     
@@ -77,4 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
     $('#menu_search').on('click', function(){
         console.log("Fui clicado.");
     })
+
+
+
 });
