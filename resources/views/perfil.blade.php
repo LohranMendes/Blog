@@ -6,7 +6,10 @@
 
 @section('conteudo')
     <div class="grid grid-cols-8">
-        <div class="col-span-1 bg-gray-perfil border-homebar"></div>
+        <div class="col-span-1 bg-gray-perfil border-homebar">
+            <div class="border-homebar">
+            </div>
+        </div>
 
         <div class="col-span-6">
             <div class="bg-gray-800 relative flex items-center text-2xl">
@@ -111,7 +114,7 @@
 
     @push('scripts')
         <script src="{{ asset('js/modal.js') }}"></script>
-        <script> var publicacoes = @json($publis); var usuario = @json($user);</script>
+        <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}};</script>
         <script src="{{asset('js/gerais.js')}}"></script>
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush

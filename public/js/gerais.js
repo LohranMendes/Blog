@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
         for (var i = 0; i < s.length; i++) {
             var u = s[i].usuario.toLowerCase();            
             if (u.indexOf(entrada) > -1 && input.value !== '') {
-                
                 html += `
                 <a href="/perfil/${s[i].usuario}">
                     <li class="text-md text-blue-500 px-2 py-1 hover:bg-gray-100">
@@ -64,6 +63,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     html += '</ul>';
                 }
             }
+            else {
+                if(html === '<ul>'){
+                    html += `<li class="text-gray-500"> Usuário não encontrado. </li>`
+
+                    if (i === s.length - 1) {
+                        html += '</ul>';
+                    }
+                }
+            }
         }
     
         div.innerHTML = html;
@@ -77,7 +85,5 @@ document.addEventListener("DOMContentLoaded", function() {
     $('#menu_search').on('click', function(){
         console.log("Fui clicado.");
     })
-
-
 
 });

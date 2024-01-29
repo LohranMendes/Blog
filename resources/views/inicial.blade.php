@@ -51,6 +51,23 @@
             <div id="publicacoes">
                 
             </div>
+
+            <div class="container">
+                <div class="flex justify-end">
+                    <div class="bg-white fixed bottom-0 border-cor border-mss w-1/5">
+                        <div class="card-branco h-80">
+                            <div class="grid grid-cols-8">
+                                <div class="col-span-7">
+                                    <input id="area_mss" name="area_mss" class="block text-sm w-full rounded-md text-post-1"></textarea>
+                                </div>
+                                <div class="col-span-1 flex items-center">
+                                    <i class="bi bi-send mx-auto w-auto h-auto"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <aside class="border-sidebar col-span-2 w-full flex flex-col">
@@ -66,7 +83,7 @@
             </div>
             
             <div class="bg-white fixed bottom-0 border-cor border-mss ml-4">
-                <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-60" placeholder="Pesquise aqui">
+                <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-auto" placeholder="Pesquise aqui">
                 <i class="bi bi-search text-color mr-2"></i>
             </div>
        </aside>

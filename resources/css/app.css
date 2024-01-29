@@ -113,7 +113,6 @@
 
 .border-homebar {
     border-right: 0.01rem solid rgb(52 211 153);
-    height: 91.2vh;
 }
 
 .text-form-post {
@@ -254,7 +253,7 @@
 }
 
 .right-2\/5 {
-    right: 18%;
+    right: 12rem;
 }
 
 .z-index-1 {
@@ -262,5 +261,16 @@
 }
 
 .border-mss {
-    border-width: 3px;
+    border-width: 1px;
+}
+
+.w-auto{
+    width: auto;
+}
+
+.card-branco {
+    background-color: white;
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.6');
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
