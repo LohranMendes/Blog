@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}} </script>
+    <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}}; </script>
 @endpush
 
 @section('conteudo')
@@ -48,26 +48,7 @@
                 </form>
             </div>
 
-            <div id="publicacoes">
-                
-            </div>
-
-            <div class="container">
-                <div class="flex justify-end">
-                    <div class="bg-white fixed bottom-0 border-cor border-mss w-1/5">
-                        <div class="card-branco h-80">
-                            <div class="grid grid-cols-8">
-                                <div class="col-span-7">
-                                    <input id="area_mss" name="area_mss" class="block text-sm w-full rounded-md text-post-1"></textarea>
-                                </div>
-                                <div class="col-span-1 flex items-center">
-                                    <i class="bi bi-send mx-auto w-auto h-auto"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="publicacoes"></div>
         </div>
 
         <aside class="border-sidebar col-span-2 w-full flex flex-col">
@@ -81,12 +62,14 @@
                     </li>
                 </ul>
             </div>
-            
-            <div class="bg-white fixed bottom-0 border-cor border-mss ml-4">
-                <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-auto" placeholder="Pesquise aqui">
-                <i class="bi bi-search text-color mr-2"></i>
+            <div class="flex justify-center">
+                <div class="bg-white fixed bottom-0 border-cor border-mss ml-4">
+                    <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-auto" placeholder="Pesquise aqui">
+                    <i class="bi bi-search text-color mr-2"></i>
+                </div>
+                <div id="menu_msg"></div>
             </div>
-       </aside>
+        </aside>
     </div>
 
     @push('modal_um')
@@ -136,9 +119,8 @@
     @endpush
 
     @push('scripts')
-        <script src="{{asset('js/gerais.js')}}"></script>
+        <script src="{{ asset('js/gerais.js')}}"></script>
         <script src="{{ asset('js/modal.js') }}"></script> 
         <script src="{{ asset('js/publicacoes.js') }}"></script> 
-        <script src="{{ asset('js/mensagens.js') }}"></script> 
     @endpush
 @endsection

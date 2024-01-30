@@ -268,9 +268,13 @@
     width: auto;
 }
 
-.card-branco {
-    background-color: white;
-    border-radius: theme('borderRadius.lg');
-    padding: theme('spacing.6');
-    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+.card-mensagem {
+    background-color: black;
+    border-radius: 7px;
+    margin-bottom: 2rem;
+}
+
+#area_mensagem {
+    height: 600px;
+    overflow-y: auto;
 }

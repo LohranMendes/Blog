@@ -51,6 +51,13 @@
 
                         <div x-show="sidebar" @click.away="siderbar = false" class="g:hidden fixed esmeralda inset-0 z-index-1 bg-opacity-85">
                             <ul class="py-1 text-sm text-white">
+                                <div class="container mt-5">
+                                    <div class="flex justify-end">
+                                        <button x-on:click="sidebar = false" class="fixed">
+                                            <i class="bi bi-x h-12 w-12"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <li> 
                                     <div class="inline-flex ml-3">
                                         <div class="border border-white mr-2 mx-auto my-auto">
@@ -59,6 +66,8 @@
                                                 <i class="bi bi-search"></i>
                                             </button>
                                         </div>
+                                    </div>
+                                    <div id="menu_search" class="absolute">
                                     </div>
                                 <li> 
                                     <a href="{{route('inicial')}}" class="mt-1 block px-4 py-1 rounded-sm hover:bg-gray-800"> Inicial </a> 

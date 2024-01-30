@@ -5,13 +5,13 @@
 @endpush
 
 @section('conteudo')
-    <div class="grid grid-cols-8">
+    <div class="grid grid-cols-10">
         <div class="col-span-1 bg-gray-perfil border-homebar">
             <div class="border-homebar">
             </div>
         </div>
 
-        <div class="col-span-6">
+        <div class="col-span-7">
             <div class="bg-gray-800 relative flex items-center text-2xl">
                 <div class="w-full justify-between">
                     <div class="img-container-2">
@@ -63,7 +63,15 @@
             </div>
         </div>
 
-        <div class="col-span-1 bg-gray-perfil border-sidebar"></div>
+        <div class="col-span-2 bg-gray-perfil border-sidebar">
+            <div class=" flex justify-center">
+                <div class="bg-white fixed bottom-0 border-cor border-mss">
+                    <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-auto" placeholder="Pesquise aqui">
+                    <i class="bi bi-search text-color mr-2"></i>
+                </div>
+                <div id="menu_msg"></div>
+            </div>
+        </div>
     </div>
 
     @push('modal_um')

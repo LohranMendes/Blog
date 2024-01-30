@@ -20,6 +20,12 @@ class PaginasController extends Controller
         return view("inicial", compact('user', 'publis'));
     }
 
+    protected function msgPagina(){
+        $user = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil', 'id_usuario')->where('id_usuario', Auth::id())->first();
+        
+        return view("mensagem", compact('user'));
+    }
+
     protected function busca(){
         $search = new buscaModel;
         $s = $search->buscaUsuarios();

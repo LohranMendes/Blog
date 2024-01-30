@@ -37,3 +37,6 @@ Route::get('/perfil/{usuario}/capaperfil', [PerfilController::class, 'getCapaPer
 
 #Rotas de Publicacões
 Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp')->middleware('auth');
+
+#Rotas de Mensagens
+Route::get('/mensagem', [PaginasController::class, 'msgPagina'])->name('msg')->middleware('auth');
