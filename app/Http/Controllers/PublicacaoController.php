@@ -18,7 +18,6 @@ class PublicacaoController extends Controller
 
         $banco = [];
 
-
         $banco['text'] = $request->publi;
         
         $banco['id_usuario'] = Auth::id();

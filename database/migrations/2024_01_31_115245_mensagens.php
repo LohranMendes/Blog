@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('publicacao', function (Blueprint $table) {
-            $table->id('id_publi');
+        Schema::create('mensagens', function (Blueprint $table) {
+            $table->id('id_mensagem');
+            $table->bigInteger('id_chat')->unsigned();
             $table->bigInteger('id_usuario')->unsigned();
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
+            $table->foreign('id_chat')->references('id_chat')->on('conversas');
             $table->string('text', 1000);
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicacao');
+        Schema::dropIfExists('mensagens');
     }
 };

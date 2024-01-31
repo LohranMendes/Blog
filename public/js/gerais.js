@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var u = p[i].usuario.toLowerCase();            
             if (u.indexOf(entrada) > -1 && pesquisa.value !== '') {
                 html += `
-                <a href="/perfil/${p[i].usuario}">
+                <a href="/mensagem/${p[i].usuario}">
                     <li class="text-md text-blue-500 px-2 py-1 hover:bg-gray-100">
                         <div class="flex items-center mr-2">
                             <div>

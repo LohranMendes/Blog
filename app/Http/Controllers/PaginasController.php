@@ -20,12 +20,6 @@ class PaginasController extends Controller
         return view("inicial", compact('user', 'publis'));
     }
 
-    protected function msgPagina(){
-        $user = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil', 'id_usuario')->where('id_usuario', Auth::id())->first();
-        
-        return view("mensagem", compact('user'));
-    }
-
     protected function busca(){
         $search = new buscaModel;
         $s = $search->buscaUsuarios();
@@ -39,6 +33,13 @@ class PaginasController extends Controller
 
     protected function registroPagina (){
         return view("auth/registro");
+    }
+
+    protected function msgPagina($usuario){
+        $user = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil', 'id_usuario')->where('id_usuario', Auth::id())->first();
+        $u = User::select('id_usuario', 'usuario', 'nome', 'sobrenome', 'foto_perfil')->where('usuario', $usuario)->first();
+
+        return view("mensagem", compact('user', 'u'));
     }
 
     protected function perfilPagina ($usuario){

@@ -1,36 +1,14 @@
-var conn = new WebSocket('ws://localhost:8002');
-var atualizado = 0;
+import {conn} from './websocket.js';
 
-conn.onopen = function(e){
-    console.log("Conexão estabelecida!");
-
-    const sinal = {
-        status: 'ativo',
-    };
-
-    conn.send(JSON.stringify(sinal));
-}
-
-conn.onmessage = function(e){
-
-    const retorno = JSON.parse(e.data);
-    console.log(retorno);
-
-    if('atualizado' in retorno){
-        var p = retorno.publicacoes;
-    }
-    else {
-        var p = publicacoes; 
-    }
-
-    function carregarPublicacoes(p) {
-        var publicacoesContainer = document.getElementById('publicacoes');
+function carregarPublicacoes(p) {
+    var publicacoesContainer = document.getElementById('publicacoes');
+    if(publicacoesContainer != null){
         publicacoesContainer.innerHTML = '';
-    
+
         p.forEach(function (publi) {
             var div = document.createElement('div');
             div.className = 'mt-2';
-    
+
             var html = `
                 <div class="border-cor border-post-style border-post-w">
                     <div class="ml-2 flex items-center">
@@ -67,7 +45,7 @@ conn.onmessage = function(e){
                     </div>
                 </div>
             `;
-    
+
             div.innerHTML = html;
             publicacoesContainer.appendChild(div);
 
@@ -81,41 +59,30 @@ conn.onmessage = function(e){
             });
         });
     }
-
-    carregarPublicacoes(p);
 }
-
-conn.onerror = function (e) {
-    console.error('WebSocket Error:', e);
-};
-
-conn.onclose = function (e) {
-    console.log('WebSocket Closed:', e);
-};
 
 document.addEventListener("DOMContentLoaded", function() {
     var formulario = document.getElementById("formPubli");
     var textarea = document.getElementById("publi");
 
-    formulario.addEventListener("submit", function(event) {
-        event.preventDefault();
+    if(formulario != null){
+        formulario.addEventListener("submit", function(event) {
+            event.preventDefault();
 
-        if(document.getElementById("publi").value === ''){
-            console.log('é vazio');
-        }
-        else {
-            const padrao = {
-                tipo: 'novaPublicacao',
-                usuario: usuario.usuario,
-                texto: document.getElementById("publi").value,
+            if(document.getElementById("publi").value !== ''){
+                const padrao = {
+                    tipo: 'novaPublicacao',
+                    usuario: usuario.usuario,
+                    texto: document.getElementById("publi").value,
+                }
+
+                if(padrao.texto.length <= 255){
+                    conn.send(JSON.stringify(padrao));
+                    textarea.value = '';
+                }
             }
-
-            if(padrao.texto.length <= 255){
-                conn.send(JSON.stringify(padrao));
-                textarea.value = '';
-            }
-        }
-    });
-
+        });
+    }
 });
 
+export { carregarPublicacoes };

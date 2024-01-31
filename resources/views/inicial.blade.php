@@ -119,8 +119,9 @@
     @endpush
 
     @push('scripts')
+        <script type="module" src="{{ asset('js/websocket.js')}}"></script>
         <script src="{{ asset('js/gerais.js')}}"></script>
         <script src="{{ asset('js/modal.js') }}"></script> 
-        <script src="{{ asset('js/publicacoes.js') }}"></script> 
+        <script type="module" src="{{ asset('js/publicacoes.js') }}"></script>
     @endpush
 @endsection

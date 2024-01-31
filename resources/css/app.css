@@ -278,3 +278,7 @@
     height: 600px;
     overflow-y: auto;
 }
+
+.min-w-32 {
+    width: 32rem;
+}

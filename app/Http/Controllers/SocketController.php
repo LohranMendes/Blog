@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\conversaModel;
+use App\Models\mensagemModel;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use App\Models\publicacaoModel;
@@ -26,10 +28,14 @@ class SocketController extends Controller implements MessageComponentInterface
         $banco = [];
 
         if(isset($data['status']) && $data['status'] === 'ativo'){
-            $confirma = ['status' => 'confirmacao'];
+            $status = 'confirmacao';
+            $post = new publicacaoModel;
+            $publicacoes = $post->postsUsuarios();
+
+            $dados = compact('publicacoes', 'status');
 
             foreach ($this->clients as $client) {
-                $client->send(json_encode($confirma));
+                $client->send(json_encode($dados));
             }
         }
 
@@ -41,7 +47,8 @@ class SocketController extends Controller implements MessageComponentInterface
             $post = new publicacaoModel;
             $publicacoes = $post->postsUsuarios();
             $atualizado = 1;
-            $dados = compact('publicacoes', 'atualizado');
+            $tipo = 'publi';
+            $dados = compact('publicacoes', 'atualizado', 'tipo');
 
             foreach ($this->clients as $client) {
                 $client->send(json_encode($dados));
@@ -55,10 +62,32 @@ class SocketController extends Controller implements MessageComponentInterface
             $publicacoes = $posts->postsUsuarios();
             
             $atualizado = 2;
-            $conteudo = compact('publicacoes', 'atualizado');
+            $tipo = 'publi';
+            $conteudo = compact('publicacoes', 'atualizado', 'tipo');
     
             foreach ($this->clients as $client) {
                 $client->send(json_encode($conteudo));
+            }
+        }
+
+        if(isset($data['tipo']) && $data['tipo'] === 'mensagem'){
+            if(!conversaModel::where(['de_id_usuario' => $data['de_usuario'], 'para_id_usuario' => $data['para_usuario']])->exists()){
+                $bancoConversa['de_id_usuario'] = $data['de_usuario'];
+                $bancoConversa['para_id_usuario'] = $data['para_usuario'];
+                conversaModel::create($bancoConversa);
+
+                $id = conversaModel::where(['de_id_usuario' => $data['de_usuario'], 'para_id_usuario' => $data['para_usuario']])->value('id_chat');
+                $bancoMensagem['id_chat'] = $id;
+                $bancoMensagem['id_usuario'] = $data['de_usuario'];
+                $bancoMensagem['text'] = $data['msg'];
+                mensagemModel::create($bancoMensagem);
+            }
+            else {
+                $id = conversaModel::where(['de_id_usuario' => $data['de_usuario'], 'para_id_usuario' => $data['para_usuario']])->value('id_chat');
+                $bancoMensagem['id_chat'] = $id;
+                $bancoMensagem['id_usuario'] = $data['de_usuario'];
+                $bancoMensagem['text'] = $data['msg'];
+                mensagemModel::create($bancoMensagem);
             }
         }
     }

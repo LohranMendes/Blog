@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\PaginasController;
 use App\Http\Controllers\AutenticacaoController;
 use App\Http\Controllers\PerfilController;
@@ -39,4 +40,4 @@ Route::get('/perfil/{usuario}/capaperfil', [PerfilController::class, 'getCapaPer
 Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp')->middleware('auth');
 
 #Rotas de Mensagens
-Route::get('/mensagem', [PaginasController::class, 'msgPagina'])->name('msg')->middleware('auth');
+Route::get('/mensagem/{usuario}', [PaginasController::class, 'msgPagina'])->name('msg')->middleware('auth');
