@@ -268,15 +268,10 @@
     width: auto;
 }
 
-.card-mensagem {
-    background-color: black;
-    border-radius: 7px;
-    margin-bottom: 2rem;
-}
-
 #area_mensagem {
     height: 600px;
     overflow-y: auto;
+    background-color: whitesmoke;
 }
 
 .min-w-32 {

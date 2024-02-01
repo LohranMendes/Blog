@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             success(op){
                 limparMenu();
                 if(entrada != ''){
-                    var s = JSON.parse(op);
-                    loopBusca(s, entrada);
+                    loopBusca(op, entrada);
                 }           
             }
         })
@@ -92,8 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
             success(op){
                 limparMenu();
                 if(entrada != ''){
-                    var p = JSON.parse(op);
-                    loopBuscaMenu(p, entrada);
+                    loopBuscaMenu(op, entrada);
                 }           
             }
         })

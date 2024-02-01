@@ -41,3 +41,4 @@ Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp')-
 
 #Rotas de Mensagens
 Route::get('/mensagem/{usuario}', [PaginasController::class, 'msgPagina'])->name('msg')->middleware('auth');
+Route::get('/mensagem/{id}/{usuario}', [PaginasController::class, 'mensagensBusca'])->name('msgBusca')->middleware('auth');

@@ -1,4 +1,5 @@
 import { carregarPublicacoes } from "./publicacoes.js";
+import { carregarMensagens } from "./mensagens.js";
 
 class WebSocketConexao {
     constructor(url) {
@@ -49,8 +50,19 @@ class WebSocketConexao {
             }
             carregarPublicacoes(p);
         }
+
+        if(retorno.tipo === 'mensagem'){
+            if('atualizado' in retorno){
+                let m = retorno.msgs;
+                carregarMensagens(m);
+            }
+            else {
+                let m = retorno.msgs;
+                carregarMensagens(m);
+            }
+        }
     }
   }
   
-  const inst = new WebSocketConexao('ws://localhost:8002');
+  const inst = new WebSocketConexao('ws://10.100.214.177:8002');
   export { inst as conn };

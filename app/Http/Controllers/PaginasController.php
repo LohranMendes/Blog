@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\buscaModel;
+use App\Models\mensagemModel;
 use App\Models\publicacaoModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,7 +25,14 @@ class PaginasController extends Controller
         $search = new buscaModel;
         $s = $search->buscaUsuarios();
 
-        echo json_encode($s);
+        return response()->json($s);
+    }
+
+    protected function mensagensBusca($id, $usuario){
+        $msg = new mensagemModel;
+        $m = $msg->mensagensChat($id, $usuario);
+
+        return response()->json($m);
     }
 
     protected function loginPagina (){
