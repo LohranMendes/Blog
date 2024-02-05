@@ -8,7 +8,6 @@ function carregarMensagens(m) {
         m.forEach(function (mensagem) {
             let div = document.createElement('div');
             div.className = 'mt-2';
-            console.log(mensagem);
 
             if(id === mensagem.id_de){
                 var html = `
@@ -63,6 +62,7 @@ function Inicial(){
 document.addEventListener("DOMContentLoaded", function(){
     let form = document.getElementById('form_msg');
     let input = document.getElementById('input_msg');
+    const tempo = new Date();
 
     Inicial();
 
@@ -75,7 +75,8 @@ document.addEventListener("DOMContentLoaded", function(){
                     tipo: 'mensagem',
                     de_usuario: id,
                     para_usuario:  u.id_usuario,
-                    msg : input.value,
+                    msg: input.value,
+                    tempo: tempo.toLocaleDateString('pt-BR').split('/').reverse().join('-') + " " + tempo.toLocaleTimeString('pt-BR'), 
                 }
 
                 if(mss.msg.length <= 1000){

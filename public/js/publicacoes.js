@@ -19,7 +19,9 @@ function carregarPublicacoes(p) {
                                 `<img src="${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`
                         }
                         <div class="flex justify-between w-full">
-                            <a href=perfil/${publi.usuario} class="text-color ml-2">${publi.usuario}</a>
+                            ${window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + publi.usuario ?
+                                `<a href=${publi.usuario} class="text-color ml-2">${publi.usuario}</a>` :
+                                `<a href=perfil/${publi.usuario} class="text-color ml-2">${publi.usuario}</a>`}
                             ${publi.id_usuario === id ?
                                 `<button type="button" class="btn_excluir">
                                     <i class="bi bi-trash mr-2 text-red-600"></i>

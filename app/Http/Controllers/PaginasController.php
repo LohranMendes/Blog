@@ -55,7 +55,7 @@ class PaginasController extends Controller
         $u = User::select('id_usuario', 'usuario', 'nome', 'sobrenome', 'foto_perfil')->where('usuario', $usuario)->first();
 
         $posts = new publicacaoModel;
-        $publis = $posts->postUsuario($u->id_usuario);
+        $publis = $posts->postUsuario($u->usuario);
 
         $user = User::select('usuario', 'foto_perfil')->where('id_usuario', Auth::id())->first();
 

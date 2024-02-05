@@ -18,6 +18,7 @@ class conversaModel extends Model
         'de_id_usuario',
         'para_id_usuario',
         'created_at',
+        'updated_at',
     ];
 
     

@@ -30,13 +30,23 @@ class SocketController extends Controller implements MessageComponentInterface
 
         if(isset($data['status']) && $data['status'] === 'ativo'){
             $status = 'confirmacao';
-            $post = new publicacaoModel;
-            $publicacoes = $post->postsUsuarios();
+            if(array_key_exists('pagina', $data) && $data['pagina'] !== 'perfil'){
+                $post = new publicacaoModel;
+                $publicacoes = $post->postsUsuarios();
 
-            $dados = compact('publicacoes', 'status');
+                $dados = compact('publicacoes', 'status');
+                foreach ($this->clients as $client) {
+                    $client->send(json_encode($dados));
+                }
+            }
+            else {
+                $post = new publicacaoModel;
+                $publicacoes = $post->postUsuario($data['usuario']);
 
-            foreach ($this->clients as $client) {
-                $client->send(json_encode($dados));
+                $dados = compact('publicacoes', 'status');
+                foreach ($this->clients as $client) {
+                    $client->send(json_encode($dados));
+                }
             }
         }
 
@@ -85,6 +95,8 @@ class SocketController extends Controller implements MessageComponentInterface
                 $bancoMensagem['text'] = $data['msg'];
                 mensagemModel::create($bancoMensagem);
 
+                conversaModel::where('id_chat', $id)->update(['updated_at' => $data['tempo']]);
+
                 $msg = new mensagemModel;
                 $msgs = $msg->mensagensChat($usuarios[0], $usuarios[1]);
 
@@ -105,6 +117,8 @@ class SocketController extends Controller implements MessageComponentInterface
 
                 $msg = new mensagemModel;
                 $msgs = $msg->mensagensChat($usuarios[0], $usuarios[1]);
+
+                conversaModel::where('id_chat', $id)->update(['updated_at' => $data['tempo']]);
 
                 $atualizado = 1;
                 $tipo = 'mensagem';

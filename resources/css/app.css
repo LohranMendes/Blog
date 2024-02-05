@@ -277,3 +277,27 @@
 .min-w-32 {
     width: 32rem;
 }
+
+.min-w-24 {
+    width: 24rem;
+}
+
+#area_conversa {
+    height: 37.5rem;
+    overflow-y: auto;
+    border: 1px solid rgb(39, 167, 120);
+}
+
+#img_mensagem {
+    overflow: hidden;
+    border: 2px solid rgb(39, 167, 120);
+    image-rendering: -webkit-optimize-contrast;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 100%;
+}
+
+#foto_conversa {
+    height: 13rem;
+}

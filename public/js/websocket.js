@@ -5,12 +5,22 @@ class WebSocketConexao {
     constructor(url) {
         if (!WebSocketConexao.instance) {
             this.socket = new WebSocket(url);
-        
             this.socket.onopen = () => {
-                const sinal = {
-                status: 'ativo',
-                };
-                this.send(JSON.stringify(sinal));
+                if(window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + usuario.usuario){
+                    const sinal = {
+                        status: 'ativo',
+                        pagina: 'perfil',
+                        usuario: usuario.usuario,   
+                    };
+                    this.send(JSON.stringify(sinal));
+                }
+                else {
+                    const sinal = {
+                        status: 'ativo',
+                        pagina: 'outros',
+                    };
+                    this.send(JSON.stringify(sinal));
+                }
             };
         
             this.socket.onclose = () => {

@@ -7,7 +7,7 @@
 @section('conteudo')
     <div class="grid grid-cols-10">
         <div class="col-span-1 bg-gray-perfil border-homebar">
-            <div class="border-homebar">
+            <div class="h-visor">
             </div>
         </div>
 
@@ -121,9 +121,10 @@
     @endpush
 
     @push('scripts')
+        <script type="module" src="{{ asset('js/websocket.js')}}"></script>
         <script src="{{ asset('js/modal.js') }}"></script>
-        <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}};</script>
+        <script> var publicacoes = @json($publis); var usuario = @json($u); var id = {{Auth::id()}};</script>
         <script src="{{asset('js/gerais.js')}}"></script>
-        <script src="{{ asset('js/publicacoes.js') }}"></script> 
+        <script type="module" src="{{ asset('js/publicacoes.js') }}"></script> 
     @endpush
 @endsection
