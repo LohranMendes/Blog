@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}}; </script>
+    <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}}; var cvs = json($cvs) </script>
 @endpush
 
 @section('conteudo')
@@ -53,14 +53,7 @@
 
         <aside class="border-sidebar col-span-2 w-full flex flex-col">
             <div class="flex-grow p-4 max-h-full">
-                <ul>
-                    <li>
-                        <span class="">Usuario 2</span>
-                    </li>
-                    <li> 
-                        <span class="">Usuario 3</span>
-                    </li>
-                </ul>
+                <div id="barra_conversas"></div>
             </div>
             <div class="flex justify-center">
                 <div class="bg-white fixed bottom-0 border-cor border-mss ml-4">

@@ -1,6 +1,7 @@
 var input, valor , i, menu;
 
 document.addEventListener("DOMContentLoaded", function() {
+    conversas();
 
     input = document.getElementById('pesquisa');
     menu = document.getElementById('menu_search');
@@ -106,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var u = p[i].usuario.toLowerCase();            
             if (u.indexOf(entrada) > -1 && pesquisa.value !== '') {
                 html += `
-                <a href="/mensagem/${p[i].usuario}">
+                <a href="/mensagem/${id}/${p[i].usuario}">
                     <li class="text-md text-blue-500 px-2 py-1 hover:bg-gray-100">
                         <div class="flex items-center mr-2">
                             <div>
@@ -154,5 +155,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function limparMenuMsg(){
         mmsg.innerHTML = '';
+    }
+
+    function conversas(){
+        let area_cvsContainer = document.getElementById('barra_conversas');
+        if(area_cvsContainer != null) { 
+            area_cvsContainer.innerHTML = '';
+
+            cvs.forEach(function (conversa) {
+                let div = document.createElement('div');
+                div.className = 'mt-2';
+
+                var html = `
+                        <div>
+                            <div class="m-3 p-3 border border-cor hover:bg-gray-100">
+                                <a href="/mensagem/${id}/${conversa.u}">
+                                    <img src="/perfil/${conversa.u}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block">
+                                    <span> ${conversa.u} </span>
+                                </a>
+                            </div>
+                        </div>
+                `;
+
+                div.innerHTML = html;
+                area_cvsContainer.appendChild(div);
+            });
+        }
     }
 });

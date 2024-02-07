@@ -49,7 +49,7 @@
                             <hr class="w-full border-cor mb-2">
                             <textarea id="publi" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui" maxlength="255"></textarea>
                             <div class="bg-gray-100 flex justify-end pr-2 rounded-sm">
-                                <button type="submit" id="publiPost" class="btn-cor btn-font-size-2 text-white p-1 my-2 rounded-md focus:outline-none">
+                                <button type="submit" id="publiPostPerfil" class="btn-cor btn-font-size-2 text-white p-1 my-2 rounded-md focus:outline-none">
                                     Publicar
                                 </button>
                             </div>

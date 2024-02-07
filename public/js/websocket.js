@@ -10,7 +10,7 @@ class WebSocketConexao {
                     const sinal = {
                         status: 'ativo',
                         pagina: 'perfil',
-                        usuario: usuario.usuario,   
+                        usuario: usuario.id,   
                     };
                     this.send(JSON.stringify(sinal));
                 }
@@ -65,10 +65,13 @@ class WebSocketConexao {
             if('atualizado' in retorno){
                 let m = retorno.msgs;
                 carregarMensagens(m);
+                console.log(m);
             }
             else {
                 let m = retorno.msgs;
+                console.log(m);
                 carregarMensagens(m);
+                console.log(m);
             }
         }
     }

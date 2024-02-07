@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Mensagens')
 @push('script-js')
-<script> var id = {{Auth::id()}}; var u = @json($u); var usuario = @json($user);</script>
+<script> var id = {{Auth::id()}}; var u = @json($u); var usuario = @json($user); var idChat = @json($chat);</script>
 @endpush
 
 @section('conteudo')
@@ -31,6 +31,8 @@
                         </div>
                     </div>
                     <hr class="border border-cor">
+                    <div id="conversas_recentes">
+                    </div>
                 </div>
             </div>
         </div>

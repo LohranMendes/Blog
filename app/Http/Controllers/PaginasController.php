@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\buscaModel;
+use App\Models\conversaModel;
 use App\Models\mensagemModel;
 use App\Models\publicacaoModel;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PaginasController extends Controller
 {
@@ -18,7 +17,10 @@ class PaginasController extends Controller
         $posts = new publicacaoModel;
         $publis = $posts->postsUsuarios();
 
-        return view("inicial", compact('user', 'publis'));
+        $c = new conversaModel;
+        $cvs = $c->buscaConversas(Auth::id());
+
+        return view("inicial", compact('user', 'publis', 'cvs'));
     }
 
     protected function busca(){
@@ -43,11 +45,20 @@ class PaginasController extends Controller
         return view("auth/registro");
     }
 
-    protected function msgPagina($usuario){
-        $user = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil', 'id_usuario')->where('id_usuario', Auth::id())->first();
+    protected function msgPagina($id, $usuario){
+        $user = User::select('usuario', 'nome', 'sobrenome', 'foto_perfil', 'id_usuario')->where('id_usuario', $id)->first();
         $u = User::select('id_usuario', 'usuario', 'nome', 'sobrenome', 'foto_perfil')->where('usuario', $usuario)->first();
+        $c = new conversaModel;
+        $chat = $c->chat($id, $usuario);
 
-        return view("mensagem", compact('user', 'u'));
+        return view("mensagem", compact('user', 'u', 'chat'));
+    }
+
+    protected function conversasBusca($id){
+        $cvs = new conversaModel;
+        $c = $cvs->buscaConversas($id);
+
+        return response()->json($c);
     }
 
     protected function perfilPagina ($usuario){

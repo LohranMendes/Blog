@@ -40,44 +40,90 @@ class SocketController extends Controller implements MessageComponentInterface
                 }
             }
             else {
+                if($data['usuario'] === Auth::id()){
+                    $u = User::where('id_usuario', Auth::id())->value('usuario');
+                    $post = new publicacaoModel;
+                    $publicacoes = $post->postUsuario($u);
+
+                    $dados = compact('publicacoes', 'status');
+                    foreach ($this->clients as $client) {
+                        $client->send(json_encode($dados));
+                    }
+                }
+                else {
+                    $u = User::where('id_usuario', $data['usuario'])->value('usuario');
+                    $post = new publicacaoModel;
+                    $publicacoes = $post->postUsuario($u);
+
+                    $dados = compact('publicacoes', 'status');
+                    foreach ($this->clients as $client) {
+                        $client->send(json_encode($dados));
+                    }
+                }
+            }
+        }
+
+        if (isset($data['tipo']) && $data['tipo'] === 'novaPublicacao') {
+            if(array_key_exists('pagina', $data) && $data['pagina'] === 'perfil'){
+                $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
+                $banco['text'] = $data['texto'];
+                publicacaoModel::create($banco);
+
                 $post = new publicacaoModel;
                 $publicacoes = $post->postUsuario($data['usuario']);
+                $atualizado = 1;
+                $tipo = 'publi';
+                $dados = compact('publicacoes', 'atualizado', 'tipo');
 
-                $dados = compact('publicacoes', 'status');
+                foreach ($this->clients as $client) {
+                    $client->send(json_encode($dados));
+                }
+            }
+            else {
+                $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
+                $banco['text'] = $data['texto'];
+                publicacaoModel::create($banco);
+
+                $post = new publicacaoModel;
+                $publicacoes = $post->postsUsuarios();
+                $atualizado = 1;
+                $tipo = 'publi';
+                $dados = compact('publicacoes', 'atualizado', 'tipo');
+
                 foreach ($this->clients as $client) {
                     $client->send(json_encode($dados));
                 }
             }
         }
 
-        if (isset($data['tipo']) && $data['tipo'] === 'novaPublicacao') {
-            $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
-            $banco['text'] = $data['texto'];
-            publicacaoModel::create($banco);
-
-            $post = new publicacaoModel;
-            $publicacoes = $post->postsUsuarios();
-            $atualizado = 1;
-            $tipo = 'publi';
-            $dados = compact('publicacoes', 'atualizado', 'tipo');
-
-            foreach ($this->clients as $client) {
-                $client->send(json_encode($dados));
-            }
-        }
-
         if(isset($data['tipo']) && $data['tipo'] === 'excluir'){
-            publicacaoModel::where('id_publi', $data['id_publi'])->delete();
+            if(array_key_exists('pagina', $data) && $data['pagina'] === 'perfil'){
+                publicacaoModel::where('id_publi', $data['id_publi'])->delete();
 
-            $posts = new publicacaoModel;
-            $publicacoes = $posts->postsUsuarios();
-            
-            $atualizado = 1;
-            $tipo = 'publi';
-            $conteudo = compact('publicacoes', 'atualizado', 'tipo');
-    
-            foreach ($this->clients as $client) {
-                $client->send(json_encode($conteudo));
+                $posts = new publicacaoModel;
+                $publicacoes = $posts->postUsuario($data['usuario']);
+                
+                $atualizado = 1;
+                $tipo = 'publi';
+                $conteudo = compact('publicacoes', 'atualizado', 'tipo');
+        
+                foreach ($this->clients as $client) {
+                    $client->send(json_encode($conteudo));
+                }
+            }
+            else {
+                publicacaoModel::where('id_publi', $data['id_publi'])->delete();
+
+                $posts = new publicacaoModel;
+                $publicacoes = $posts->postsUsuarios();
+                
+                $atualizado = 1;
+                $tipo = 'publi';
+                $conteudo = compact('publicacoes', 'atualizado', 'tipo');
+        
+                foreach ($this->clients as $client) {
+                    $client->send(json_encode($conteudo));
+                }
             }
         }
 

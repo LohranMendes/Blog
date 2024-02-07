@@ -40,5 +40,6 @@ Route::get('/perfil/{usuario}/capaperfil', [PerfilController::class, 'getCapaPer
 Route::post('/inicial', [PublicacaoController::class, 'publiPost'])->name('pp')->middleware('auth');
 
 #Rotas de Mensagens
-Route::get('/mensagem/{usuario}', [PaginasController::class, 'msgPagina'])->name('msg')->middleware('auth');
-Route::get('/mensagem/{id}/{usuario}', [PaginasController::class, 'mensagensBusca'])->name('msgBusca')->middleware('auth');
+Route::get('/mensagem/{id}/{usuario}', [PaginasController::class, 'msgPagina'])->name('msg')->middleware('auth');
+Route::get('/mensagens/{id}/{usuario}', [PaginasController::class, 'mensagensBusca'])->name('msgBusca')->middleware('auth');
+Route::get('/conversas/{id}', [PaginasController::class, 'conversasBusca'])->name('cvsBusca')->middleware('auth');

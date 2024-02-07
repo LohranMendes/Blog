@@ -13,20 +13,20 @@ function carregarPublicacoes(p) {
                 <div class="border-cor border-post-style border-post-w">
                     <div class="ml-2 flex items-center">
                         ${publi.foto_perfil === 'img/foto-de-perfil-de-usuario.jpg' ? 
-                            `<img src="${publi.foto_perfil}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`:
+                            `<img src="${publi.foto_perfil}" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">` :
                             window.location.href === 'http://' + window.location.hostname + ':8000/inicial' ? 
                                 `<img src="perfil/${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">` :
                                 `<img src="${publi.usuario}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block mt-2 mb-2">`
                         }
                         <div class="flex justify-between w-full">
-                            ${window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + publi.usuario ?
-                                `<a href=${publi.usuario} class="text-color ml-2">${publi.usuario}</a>` :
-                                `<a href=perfil/${publi.usuario} class="text-color ml-2">${publi.usuario}</a>`}
-                            ${publi.id_usuario === id ?
-                                `<button type="button" class="btn_excluir">
-                                    <i class="bi bi-trash mr-2 text-red-600"></i>
-                                </button>` : ''}
-                        </div>
+                                ${window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + publi.usuario ?
+                                    `<a href=${publi.usuario} class="text-color ml-2">${publi.usuario}</a>` :
+                                    `<a href=perfil/${publi.usuario} class="text-color ml-2">${publi.usuario}</a>`}
+                                ${publi.id_usuario === id ?
+                                    `<button type="button" class="btn_excluir">
+                                        <i class="bi bi-trash mr-2 text-red-600"></i>
+                                    </button>` : ''}
+                            </div>
                     </div>
                     <div class="text-xs mb-4 ml-2 mt-1">
                         ${publi.text}
@@ -45,23 +45,34 @@ function carregarPublicacoes(p) {
                             Compartilhar
                         </span>
                     </div>
-                </div>
-            `;
+                </div>`;        
 
             div.innerHTML = html;
             publicacoesContainer.appendChild(div);
 
             $(div).find('.btn_excluir').on('click', function(){
-                const excluir = {
-                    tipo: 'excluir',
-                    id_publi: publi.id_publi,
-                }
+                if(window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + usuario.usuario){
+                    const excluir = {
+                        tipo: 'excluir',
+                        id_publi: publi.id_publi,
+                        pagina: 'perfil',
+                        usuario: publi.usuario,
+                    }
 
-                conn.send(JSON.stringify(excluir));
+                    conn.send(JSON.stringify(excluir));
+                } else {
+                    const excluir = {
+                        tipo: 'excluir',
+                        id_publi: publi.id_publi,
+                    }
+
+                    conn.send(JSON.stringify(excluir));
+                }
             });
         });
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     var formulario = document.getElementById("formPubli");
@@ -72,15 +83,27 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
 
             if(document.getElementById("publi").value !== ''){
-                const padrao = {
+                if(window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + usuario.usuario && id === usuario.id){
+                    const padrao = {
+                        tipo: 'novaPublicacao',
+                        pagina: 'perfil',
+                        usuario: usuario.usuario,
+                        texto: document.getElementById("publi").value,
+                    }
+                    if(padrao.texto.length <= 255){
+                        conn.send(JSON.stringify(padrao));
+                        textarea.value = '';
+                    }
+                } else {
+                    const padrao = {
                     tipo: 'novaPublicacao',
                     usuario: usuario.usuario,
                     texto: document.getElementById("publi").value,
                 }
-
-                if(padrao.texto.length <= 255){
-                    conn.send(JSON.stringify(padrao));
-                    textarea.value = '';
+                    if(padrao.texto.length <= 255){
+                        conn.send(JSON.stringify(padrao));
+                        textarea.value = '';
+                    }
                 }
             }
         });
