@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script src="{{ asset('js/modal.js') }}"></script> 
+    <script> var publicacoes = {!! json_encode($publis) !!}; var usuario = {!! json_encode($u) !!}; var id = {{Auth::id()}};</script>
 @endpush
 
 @section('conteudo')
@@ -42,12 +42,12 @@
 
             @if(Auth::id() == $u->id_usuario)
                 <div class="ml-2 mr-2 mt-2">
-                    <form id="formPubli" method="POST">
+                    <form id="formPubliPerfil" method="POST">
                         @csrf
                         <div class="border-cor border-post-style border-post-w ">
-                            <label for="publi" class="text-form-post  mb-1 pl-2"> Crie um novo tópico! </label>
+                            <label for="publiPerfil" class="text-form-post  mb-1 pl-2"> Crie um novo tópico! </label>
                             <hr class="w-full border-cor mb-2">
-                            <textarea id="publi" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui" maxlength="255"></textarea>
+                            <textarea id="publiPerfil" name="publi" class="block text-sm pb-5 px-2 w-full rounded-md text-post-1" placeholder="Digite aqui" maxlength="255"></textarea>
                             <div class="bg-gray-100 flex justify-end pr-2 rounded-sm">
                                 <button type="submit" id="publiPostPerfil" class="btn-cor btn-font-size-2 text-white p-1 my-2 rounded-md focus:outline-none">
                                     Publicar
@@ -58,7 +58,7 @@
                 </div>
             @endif
             
-            <div id="publicacoes" class="ml-2 mr-2">
+            <div id="publicacoesPerfil" class="ml-2 mr-2">
                
             </div>
         </div>
@@ -123,8 +123,7 @@
     @push('scripts')
         <script type="module" src="{{ asset('js/websocket.js')}}"></script>
         <script src="{{ asset('js/modal.js') }}"></script>
-        <script> var publicacoes = @json($publis); var usuario = @json($u); var id = {{Auth::id()}};</script>
         <script src="{{asset('js/gerais.js')}}"></script>
-        <script type="module" src="{{ asset('js/publicacoes.js') }}"></script> 
+        <script type="module" src="{{asset('js/perfil.js')}}"></script>
     @endpush
 @endsection

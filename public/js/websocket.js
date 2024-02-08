@@ -1,26 +1,16 @@
 import { carregarPublicacoes } from "./publicacoes.js";
 import { carregarMensagens } from "./mensagens.js";
+import { carregarPublicacoesPerfil } from "./perfil.js";
 
 class WebSocketConexao {
     constructor(url) {
         if (!WebSocketConexao.instance) {
             this.socket = new WebSocket(url);
             this.socket.onopen = () => {
-                if(window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + usuario.usuario){
                     const sinal = {
-                        status: 'ativo',
-                        pagina: 'perfil',
-                        usuario: usuario.id,   
-                    };
+                    status: 'ativo',
+                    }
                     this.send(JSON.stringify(sinal));
-                }
-                else {
-                    const sinal = {
-                        status: 'ativo',
-                        pagina: 'outros',
-                    };
-                    this.send(JSON.stringify(sinal));
-                }
             };
         
             this.socket.onclose = () => {
@@ -49,7 +39,29 @@ class WebSocketConexao {
         const retorno = JSON.parse(msg);
 
         if(retorno.status === 'confirmacao'){
-            carregarPublicacoes(retorno.publicacoes);
+            console.log(retorno);
+        }
+
+        if(retorno.alerta === 'carregando'){
+            if ('atualizado' in retorno) {
+                var p = retorno.publicacoes;
+                console.log(retorno);
+                console.log('1');
+            } else {
+                var p = publicacoes;
+                console.log(2);
+            }
+            carregarPublicacoesPerfil(p);
+        }
+
+        if(retorno.tipo === 'publiPerfil'){
+            console.log("novapubli");
+            if ('atualizado' in retorno) {
+                var p = retorno.publicacoes;
+            } else {
+                var p = publicacoes;
+            }
+            carregarPublicacoesPerfil(p);
         }
 
         if(retorno.tipo === 'publi'){

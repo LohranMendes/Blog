@@ -40,4 +40,14 @@ class publicacaoModel extends Model
 
         return $result;
     }
+
+    public function postUsuarioId($usuario){
+        $result = DB::select("SELECT u.id_usuario, u.usuario, p.text, u.foto_perfil, p.id_publi
+        FROM usuarios u
+        JOIN publicacao p ON u.id_usuario = p.id_usuario and u.id_usuario = $usuario
+        ORDER BY p.created_at DESC
+        LIMIT 100;");
+
+        return $result;
+    }
 }

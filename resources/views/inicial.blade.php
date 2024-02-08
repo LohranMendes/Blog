@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script> var publicacoes = @json($publis); var usuario = @json($user); var id = {{Auth::id()}}; var cvs = json($cvs) </script>
+    <script> var publicacoes = {!! json_encode($publis) !!}; var usuario = {!! json_encode($user) !!}; var id = {{Auth::id()}}; var cvs = {!! json_encode($cvs) !!}; </script>
 @endpush
 
 @section('conteudo')

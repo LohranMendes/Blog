@@ -30,56 +30,49 @@ class SocketController extends Controller implements MessageComponentInterface
 
         if(isset($data['status']) && $data['status'] === 'ativo'){
             $status = 'confirmacao';
-            if(array_key_exists('pagina', $data) && $data['pagina'] !== 'perfil'){
-                $post = new publicacaoModel;
-                $publicacoes = $post->postsUsuarios();
+            $dados = compact('status');
+            foreach ($this->clients as $client) {
+                $client->send(json_encode($dados));
+            }
+        }
 
-                $dados = compact('publicacoes', 'status');
-                foreach ($this->clients as $client) {
+        if(isset($data['tipo']) && $data['tipo'] === 'carregarPublicacoesPerfil'){
+            $u = User::where('id_usuario', $data['id'])->value('usuario');
+            $post = new publicacaoModel;
+            $publicacoes = $post->postUsuario($u);
+
+            $atualizado = 1;
+            $alerta = 'carregando';
+
+            $dados = compact('alerta', 'publicacoes', 'atualizado');
+            foreach ($this->clients as $client) {
+                if ($client === $conn) { 
                     $client->send(json_encode($dados));
+                    break; 
                 }
             }
-            else {
-                if($data['usuario'] === Auth::id()){
-                    $u = User::where('id_usuario', Auth::id())->value('usuario');
-                    $post = new publicacaoModel;
-                    $publicacoes = $post->postUsuario($u);
+        }
 
-                    $dados = compact('publicacoes', 'status');
-                    foreach ($this->clients as $client) {
-                        $client->send(json_encode($dados));
-                    }
-                }
-                else {
-                    $u = User::where('id_usuario', $data['usuario'])->value('usuario');
-                    $post = new publicacaoModel;
-                    $publicacoes = $post->postUsuario($u);
+        if (isset($data['tipo']) && $data['tipo'] === 'novaPublicacaoPerfil') {
+            $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
+            $banco['text'] = $data['texto'];
+            publicacaoModel::create($banco);
 
-                    $dados = compact('publicacoes', 'status');
-                    foreach ($this->clients as $client) {
-                        $client->send(json_encode($dados));
-                    }
+            $post = new publicacaoModel;
+            $publicacoes = $post->postUsuario($data['usuario']);
+            $atualizado = 1;
+            $tipo = 'publiPerfil';
+            $dados = compact('publicacoes', 'atualizado', 'tipo');
+
+            foreach ($this->clients as $client) {
+                if ($client === $conn) { 
+                    $client->send(json_encode($dados));
+                    break; 
                 }
             }
         }
 
         if (isset($data['tipo']) && $data['tipo'] === 'novaPublicacao') {
-            if(array_key_exists('pagina', $data) && $data['pagina'] === 'perfil'){
-                $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
-                $banco['text'] = $data['texto'];
-                publicacaoModel::create($banco);
-
-                $post = new publicacaoModel;
-                $publicacoes = $post->postUsuario($data['usuario']);
-                $atualizado = 1;
-                $tipo = 'publi';
-                $dados = compact('publicacoes', 'atualizado', 'tipo');
-
-                foreach ($this->clients as $client) {
-                    $client->send(json_encode($dados));
-                }
-            }
-            else {
                 $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
                 $banco['text'] = $data['texto'];
                 publicacaoModel::create($banco);
@@ -93,7 +86,6 @@ class SocketController extends Controller implements MessageComponentInterface
                 foreach ($this->clients as $client) {
                     $client->send(json_encode($dados));
                 }
-            }
         }
 
         if(isset($data['tipo']) && $data['tipo'] === 'excluir'){

@@ -1,7 +1,8 @@
 @extends('layout.master')
 @section('titulo', 'Mensagens')
+
 @push('script-js')
-<script> var id = {{Auth::id()}}; var u = @json($u); var usuario = @json($user); var idChat = @json($chat);</script>
+<script> var id = {{Auth::id()}}; var u = {!! json_encode($u) !!};; var usuario = {!! json_encode($user) !!}; var idChat = {!! json_encode($chat) !!};</script>
 @endpush
 
 @section('conteudo')

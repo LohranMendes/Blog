@@ -83,27 +83,15 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
 
             if(document.getElementById("publi").value !== ''){
-                if(window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + usuario.usuario && id === usuario.id){
-                    const padrao = {
-                        tipo: 'novaPublicacao',
-                        pagina: 'perfil',
-                        usuario: usuario.usuario,
-                        texto: document.getElementById("publi").value,
-                    }
-                    if(padrao.texto.length <= 255){
-                        conn.send(JSON.stringify(padrao));
-                        textarea.value = '';
-                    }
-                } else {
-                    const padrao = {
-                    tipo: 'novaPublicacao',
-                    usuario: usuario.usuario,
-                    texto: document.getElementById("publi").value,
+                const padrao = {
+                tipo: 'novaPublicacao',
+                usuario: usuario.usuario,
+                texto: document.getElementById("publi").value,
                 }
-                    if(padrao.texto.length <= 255){
-                        conn.send(JSON.stringify(padrao));
-                        textarea.value = '';
-                    }
+                
+                if(padrao.texto.length <= 255){
+                    conn.send(JSON.stringify(padrao));
+                    textarea.value = '';
                 }
             }
         });

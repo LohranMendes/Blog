@@ -97,7 +97,9 @@ document.addEventListener("DOMContentLoaded", function(){
     let input = document.getElementById('input_msg');
     const tempo = new Date();
 
-    Inicial();
+    if(window.location.href === 'http:' + window.location.hostname + ':8000/mensagem/' + usuario.usuario){
+        Inicial();
+    }
 
     if(form != null){
         form.addEventListener("submit", function(e){
