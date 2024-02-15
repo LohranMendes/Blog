@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('titulo', 'Página Inicial')
 @push('script-js')
-    <script> var publicacoes = {!! json_encode($publis) !!}; var usuario = {!! json_encode($u) !!}; var id = {{Auth::id()}};</script>
+    <script> var publicacoes = {!! json_encode($publis) !!}; var usuario = {!! json_encode($u) !!}; var id = {{Auth::id()}}; var cvs = {!! json_encode($cvs) !!};</script>
 @endpush
 
 @section('conteudo')
@@ -64,14 +64,16 @@
         </div>
 
         <div class="col-span-2 bg-gray-perfil border-sidebar">
-            <div class=" flex justify-center">
-                <div class="bg-white fixed bottom-0 border-cor border-mss">
+            <div class="flex-grow p-4 max-h-full">
+                <div id="barra_conversas"></div>
+            </div>
+            <div class="flex justify-center">
+                <div class="bg-white fixed bottom-0 border-cor border-mss ml-4">
                     <input id="pesquisa_msg" type="text" id="pesquisa" class="pl-1 pesquisa w-auto" placeholder="Pesquise aqui">
                     <i class="bi bi-search text-color mr-2"></i>
                 </div>
                 <div id="menu_msg"></div>
             </div>
-        </div>
     </div>
 
     @push('modal_um')

@@ -96,8 +96,9 @@ document.addEventListener("DOMContentLoaded", function(){
     let form = document.getElementById('form_msg');
     let input = document.getElementById('input_msg');
     const tempo = new Date();
+    console.log(window.location.href === 'http://' + window.location.hostname + ':8000/mensagem/' + id + '/' + u.usuario);
 
-    if(window.location.href === 'http:' + window.location.hostname + ':8000/mensagem/' + usuario.usuario){
+    if(window.location.href === 'http://' + window.location.hostname + ':8000/mensagem/' + id + '/' + u.usuario){
         Inicial();
     }
 

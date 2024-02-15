@@ -70,6 +70,9 @@ class PaginasController extends Controller
 
         $user = User::select('usuario', 'foto_perfil')->where('id_usuario', Auth::id())->first();
 
-        return view("perfil", compact('user', 'publis', 'u'));
+        $c = new conversaModel;
+        $cvs = $c->buscaConversas(Auth::id());
+
+        return view("perfil", compact('user', 'publis', 'u', 'cvs'));
     }
 }

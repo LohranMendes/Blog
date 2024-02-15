@@ -168,12 +168,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 var html = `
                         <div>
-                            <div class="m-3 p-3 border border-cor hover:bg-gray-100">
-                                <a href="/mensagem/${id}/${conversa.u}">
+                            <a href="/mensagem/${id}/${conversa.u}">
+                                <div class="m-3 p-3 border border-cor hover:bg-gray-100">
+
                                     <img src="/perfil/${conversa.u}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block">
                                     <span> ${conversa.u} </span>
-                                </a>
-                            </div>
+                                </div>
+                            </a>
                         </div>
                 `;
 

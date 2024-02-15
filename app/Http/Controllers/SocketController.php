@@ -8,7 +8,6 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use App\Models\publicacaoModel;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class SocketController extends Controller implements MessageComponentInterface
 {
