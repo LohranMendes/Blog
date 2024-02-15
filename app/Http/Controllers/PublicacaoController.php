@@ -31,4 +31,10 @@ class PublicacaoController extends Controller
 
         return Redirect::route('inicial');
     }
+
+    public function publis () {
+        $posts = new publicacaoModel;
+        $publis = $posts->postsUsuarios();
+        return response()->json($publis);
+    }
 }

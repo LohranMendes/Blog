@@ -53,6 +53,24 @@ class SocketController extends Controller implements MessageComponentInterface
             }
         }
 
+        if (isset($data['tipo']) && $data['tipo'] === 'excluirPerfil') {
+            publicacaoModel::where('id_publi', $data['id_publi'])->delete();
+
+            $posts = new publicacaoModel;
+            $publicacoes = $posts->postUsuario($data['usuario']);
+            
+            $atualizado = 1;
+            $tipo = 'publiPerfil';
+            $conteudo = compact('publicacoes', 'atualizado', 'tipo');
+
+            foreach ($this->clients as $client) {
+                if ($client === $conn) { 
+                    $client->send(json_encode($conteudo));
+                    break; 
+                }
+            }
+        }
+
         if (isset($data['tipo']) && $data['tipo'] === 'novaPublicacaoPerfil') {
             $banco['id_usuario'] = User::where('usuario', $data['usuario'])->value('id_usuario');
             $banco['text'] = $data['texto'];
@@ -89,21 +107,6 @@ class SocketController extends Controller implements MessageComponentInterface
         }
 
         if(isset($data['tipo']) && $data['tipo'] === 'excluir'){
-            if(array_key_exists('pagina', $data) && $data['pagina'] === 'perfil'){
-                publicacaoModel::where('id_publi', $data['id_publi'])->delete();
-
-                $posts = new publicacaoModel;
-                $publicacoes = $posts->postUsuario($data['usuario']);
-                
-                $atualizado = 1;
-                $tipo = 'publi';
-                $conteudo = compact('publicacoes', 'atualizado', 'tipo');
-        
-                foreach ($this->clients as $client) {
-                    $client->send(json_encode($conteudo));
-                }
-            }
-            else {
                 publicacaoModel::where('id_publi', $data['id_publi'])->delete();
 
                 $posts = new publicacaoModel;
@@ -116,7 +119,6 @@ class SocketController extends Controller implements MessageComponentInterface
                 foreach ($this->clients as $client) {
                     $client->send(json_encode($conteudo));
                 }
-            }
         }
 
         if(isset($data['tipo']) && $data['tipo'] === 'mensagem'){

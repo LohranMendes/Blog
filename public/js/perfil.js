@@ -54,17 +54,9 @@ function carregarPublicacoesPerfil(p) {
             $(div).find('.btn_excluir').on('click', function(){
                 if(window.location.href === 'http://' + window.location.hostname + ':8000/perfil/' + usuario.usuario){
                     const excluir = {
-                        tipo: 'excluir',
+                        tipo: 'excluirPerfil',
                         id_publi: publi.id_publi,
-                        pagina: 'perfil',
                         usuario: publi.usuario,
-                    }
-
-                    conn.send(JSON.stringify(excluir));
-                } else {
-                    const excluir = {
-                        tipo: 'excluir',
-                        id_publi: publi.id_publi,
                     }
 
                     conn.send(JSON.stringify(excluir));
@@ -93,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         conn.send(JSON.stringify(padrao));
                         textarea.value = '';
                     }
-                console.log('CAIXA DA PUBLI NO PERFIL');
             }
         });
     }

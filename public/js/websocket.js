@@ -40,16 +40,23 @@ class WebSocketConexao {
 
         if(retorno.status === 'confirmacao'){
             console.log(retorno);
+            if(window.location.href === 'http://' + window.location.hostname + ':8000/inicial'){
+                $.ajax({
+                    type: 'GET',
+                    url: '/publicacoesdeusuarios',
+                    success(op){
+                        console.log(op);
+                        carregarPublicacoes(op);
+                    }
+                })
+            }
         }
 
         if(retorno.alerta === 'carregando'){
             if ('atualizado' in retorno) {
                 var p = retorno.publicacoes;
-                console.log(retorno);
-                console.log('1');
             } else {
                 var p = publicacoes;
-                console.log(2);
             }
             carregarPublicacoesPerfil(p);
         }
@@ -64,9 +71,19 @@ class WebSocketConexao {
             carregarPublicacoesPerfil(p);
         }
 
+        if(retorno.tipo === 'publiPerfil'){
+            if ('atualizado' in retorno) {
+                var p = retorno.publicacoes;
+            } else {
+                var p = publicacoes;
+            }
+            carregarPublicacoes(p);
+        }
+
         if(retorno.tipo === 'publi'){
             if ('atualizado' in retorno) {
                 var p = retorno.publicacoes;
+                console.log(1);
             } else {
                 var p = publicacoes;
             }
@@ -77,13 +94,10 @@ class WebSocketConexao {
             if('atualizado' in retorno){
                 let m = retorno.msgs;
                 carregarMensagens(m);
-                console.log(m);
             }
             else {
                 let m = retorno.msgs;
-                console.log(m);
                 carregarMensagens(m);
-                console.log(m);
             }
         }
     }
