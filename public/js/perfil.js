@@ -92,14 +92,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function carregarPublis() {
-    if (conn.socket.readyState === WebSocket.OPEN) {
+    if (conn.socket.readyState === WebSocket.OPEN && window.location.href === 'http://' + window.location.hostname + ':8000/perfil/usuario.usuario') {
         const sinal = {
             tipo: 'carregarPublicacoesPerfil',
             id: usuario.id_usuario,
         };
         conn.send(JSON.stringify(sinal));
-    } else {
-        console.error('WebSocket não está pronto para enviar mensagens.');
     }
 }
 

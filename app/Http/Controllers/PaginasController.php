@@ -32,10 +32,15 @@ class PaginasController extends Controller
 
     protected function mensagensBusca($id, $usuario){
         $msg = new mensagemModel;
-        $m = $msg->mensagensChat($id, $usuario);
-
+        try {
+            $m = $msg->mensagensChat($id, $usuario);
+        } catch (\Exception $e) {
+            $m = null;
+        }
+        
         return response()->json($m);
     }
+    
 
     protected function loginPagina (){
         return view("auth/login");

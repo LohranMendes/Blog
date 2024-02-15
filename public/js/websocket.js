@@ -37,6 +37,7 @@ class WebSocketConexao {
   
     handleMessage(msg) {
         const retorno = JSON.parse(msg);
+        console.log(retorno);
 
         if(retorno.status === 'confirmacao'){
             console.log(retorno);

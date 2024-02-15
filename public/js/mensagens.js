@@ -2,7 +2,7 @@ import {conn} from './websocket.js'
 
 function carregarMensagens(m) {
     let area_msgContainer = document.getElementById('area_mensagem');
-    if(area_msgContainer != null && idChat === m[0].chat) { 
+    if(area_msgContainer != null && (idChat === null || idChat === m[0].chat)) { 
         area_msgContainer.innerHTML = '';
 
         m.forEach(function (mensagem) {
@@ -56,12 +56,12 @@ function CarregarConversas(c){
 
             var html = `
                     <div>
-                        <div class="m-3 p-3 border border-cor hover:bg-gray-100">
-                            <a href="/mensagem/${id}/${conversa.u}">
+                        <a href="/mensagem/${id}/${conversa.u}">
+                            <div class="m-3 p-3 border border-cor hover:bg-gray-100">
                                 <img src="/perfil/${conversa.u}/fotoperfil" alt="Foto do Perfil" class="h-8 w-8 inline-block">
                                 <span> ${conversa.u} </span>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
             `;
 
@@ -79,8 +79,10 @@ function Inicial(){
         type: 'GET',
         url: "/mensagens/" +  usuarios[0] + "/" + usuarios[1],
         success(op){
-            carregarMensagens(op);
-        } 
+            if (op && Object.keys(op).length !== 0) {
+                carregarMensagens(op);
+            }
+        }
     })
 
     $.ajax({
@@ -96,9 +98,9 @@ document.addEventListener("DOMContentLoaded", function(){
     let form = document.getElementById('form_msg');
     let input = document.getElementById('input_msg');
     const tempo = new Date();
-    console.log(window.location.href === 'http://' + window.location.hostname + ':8000/mensagem/' + id + '/' + u.usuario);
 
-    if(window.location.href === 'http://' + window.location.hostname + ':8000/mensagem/' + id + '/' + u.usuario){
+    
+    if(typeof u !== 'undefined' && window.location.href === 'http://' + window.location.hostname + ':8000/mensagem/' + id + '/' + u.usuario){
         Inicial();
     }
 
